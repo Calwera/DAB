@@ -1,0 +1,60 @@
+.general-form {
+  margin: 0 auto;
+  margin-top: 2rem;
+  border: 1px solid $color-text-gray;
+  border-radius: 5px;
+  width: 24rem;
+  height: 10rem;
+  padding: 0.3rem;
+  background-color: $color-primary-light;
+  overflow: hidden;
+  display: flex;
+
+  &__login {
+    color: $color-text-gray;
+    display: block;
+  }
+
+  &__log-input {
+    margin-top: 0.5rem;
+    color: $color-text-gray;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 0.5rem;
+    display: block;
+    width: 85%;
+  }
+
+  &__password {
+    display: block;
+    color: $color-text-gray;
+    margin-top: 0.5rem;
+  }
+
+  &__passw-field {
+    margin-top: 0.5rem;
+    color: $color-text-gray;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    padding: 0.5rem;
+    display: block;
+    width: 85%;
+  }
+  &__first {
+    flex: 2;
+  }
+  &__second {
+    align-self: center;
+  }
+
+  &__btn {
+    cursor: pointer;
+    text-decoration: none;
+    border: 2px solid gray;
+    border-radius: 10px;
+    background-color: $color-primary-dark;
+    padding: 0.5rem;
+    margin-right: 1rem;
+    text-transform: uppercase;
+  }
+}
