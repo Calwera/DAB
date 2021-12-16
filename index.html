@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Domowa Aplikacja Budzetu</title>
+    <link rel="stylesheet" href="/css/style.css" />
+
+    <!-- FONT EXO 2 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <h2 class="general-title">Domowa Aplikacja Budzetu</h2>
+
+    <form action="POST" class="general-form">
+      <div class="general-form__first">
+        <label for="log" class="general-form__login"
+          >Nazwa Uzytkownika
+          <input
+            type="text"
+            id="log"
+            class="general-form__log-input"
+            required
+            placeholder="nazwa uzytkownika"
+          />
+        </label>
+
+        <label for="pas" class="general-form__password"
+          >Hasło
+          <input
+            type="password"
+            id="pas"
+            class="general-form__passw-field"
+            placeholder="hasło"
+          />
+        </label>
+      </div>
+      <div class="general-form__second">
+        <input type="submit" class="general-form__btn" value="login" />
+      </div>
+    </form>
+  </body>
+</html>
