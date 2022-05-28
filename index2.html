@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="/css/style.css" />
+    <!-- FONT EXO 2 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <title>DAB Strona główna</title>
+  </head>
+  <body>
+    <section class="main-page">
+      <div class="main-page__menu-left">
+        <a href="#" class="main-page__menu-left-add wyswietl">wyswietl</a>
+        <a href="#" class="main-page__menu-left-add dodaj">dodaj</a>
+        <a href="#" class="main-page__menu-left-add zmodyfikuj">zmodyfikuj</a>
+        <a href="#" class="main-page__menu-left-add usun">usun</a>
+        <a href="#" class="main-page__menu-left-add wyswieltw"
+          >wyswietl wszystko</a
+        >
+      </div>
+      <div class="main-page__content-center">
+        <h2 class="main-page__content-center-title">Dane za ostatni miesiąc</h2>
+        <div class="main-page__content-center-stats">
+          <div class="main-page__content-center-stats-income">
+            <div class="main-page__content-center-stats-income-name">
+              Przychod
+            </div>
+            <div class="main-page__content-center-stats-income-number">
+              8032
+            </div>
+          </div>
+
+          <div class="main-page__content-center-stats-outcome">
+            <div class="main-page__content-center-stats-outcome-name">
+              Koszty
+            </div>
+            <div class="main-page__content-center-stats-outcome-number">
+              5012
+            </div>
+          </div>
+
+          <div class="main-page__content-center-stats-total">
+            <div class="main-page__content-center-stats-total-name">Dochód</div>
+            <div class="main-page__content-center-stats-total-number">3020</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- POPUPS -->
+    <!-- DODAJ -->
+    <div class="popup">
+      <div class="popup__add">
+        <h2 class="popup__add-title">Dodaj</h2>
+        <img src="/img/x_icon.svg" alt="X" class="popup__add-exit" />
+        <form action="POST" method="post" class="popup__add-form">
+          <div>
+            <label for="category" class="popup__add-form-select"
+              >Wybierz kategorie</label
+            >
+            <select id="category">
+              <option value="">Wybierz Kategorie</option>
+              <option value="Jedzenie">Jedzenie</option>
+              <option value="Rachunki">Rachunki</option>
+              <option value="Zakupy">Zakupy</option>
+              <option value="Raty">Raty</option>
+            </select>
+          </div>
+          <div>
+            <label for="value">Kwota</label>
+            <input type="number" id="value" placeholder="0" required />
+          </div>
+          <div>
+            <label for="opis">Opis</label>
+            <input type="text" id="opis" placeholder="zakupy" />
+          </div>
+          <button class="btn">Wyslij</button>
+        </form>
+        <!-- USUN -->
+      </div>
+    </div>
+    <script src="./js/script.js"></script>
+  </body>
+</html>

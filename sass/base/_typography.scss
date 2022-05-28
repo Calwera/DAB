@@ -1,6 +1,23 @@
+body {
+  color: $color-text-gray;
+}
+
 .general-form {
   font-size: 1.2rem;
   &__btn {
     font-size: 1.6rem;
+  }
+}
+
+.main-page {
+  &__menu-left-add:link,
+  &__menu-left-add:visited {
+    font-size: 1.8rem;
+    font-weight: 600;
+  }
+  &__content-center-stats {
+    font-size: 3rem;
+    font-weight: 700;
+    text-transform: uppercase;
   }
 }
