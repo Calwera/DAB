@@ -17,34 +17,42 @@
   </head>
 
   <body>
-    <h2 class="general-title">DAB</h2>
-    <img src="/img/dab_main.svg" alt="App Logo" class="general-appicon" />
-    <form action="POST" class="general-form">
-      <div class="general-form__first">
-        <label for="log" class="general-form__login"
+    
+    <div class="general">
+      
+      <h2 class="general--title">DOMOWA APLIKACJA BUDŻETU</h2>
+      <div class="general--board">
+        <img src="/img/dab_main.svg" alt="App Logo" class="general--appicon" />
+    
+
+    <action="POST" class="general--form">
+      <div class="general--form__first">
+        <label for="log" class="general--form__login"
           >Nazwa Uzytkownika
           <input
             type="text"
             id="log"
-            class="general-form__log-input"
+            class="general--form__log-input"
             required
             placeholder="NAZWA UŻYTKOWNIKA"
           />
         </label>
 
-        <label for="pas" class="general-form__password"
+        <label for="pas" class="general--form__password"
           >Hasło
           <input
             type="password"
             id="pas"
-            class="general-form__passw-field"
+            class="general--form__passw-field"
             placeholder="HASŁO"
           />
         </label>
+        
+        <input type="submit" class="general--form__btn" value="Zaloguj" />
       </div>
-      <div class="general-form__second">
-        <input type="submit" class="general-form__btn" value="login" />
-      </div>
+     
     </form>
+  </div>
+  </div>
   </body>
 </html>

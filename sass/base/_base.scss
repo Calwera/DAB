@@ -17,15 +17,9 @@ html {
   background-color: $color-primary;
 }
 
-.general-title {
-  font-size: 5rem;
+.general--title {
+  font-size: 3rem;
   text-align: center;
-  margin-top: 5rem;
+  margin-top: 2rem 0;
   color: $color-text-gray;
-}
-
-.general-appicon {
-  margin-left: auto;
-  margin-right: auto;
-  width: 50%;
 }
