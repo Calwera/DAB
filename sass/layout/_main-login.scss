@@ -18,6 +18,7 @@
     padding: 0;
     margin: 0;
     align-self: center;
+    animation: moveInLeft 1s ease-out;
   }
 
   &--form {
@@ -31,6 +32,8 @@
     overflow: hidden;
     display: flex;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+
+    animation: moveInRight 1s ease-in-out;
 
     &__login {
       color: $color-text-gray;
