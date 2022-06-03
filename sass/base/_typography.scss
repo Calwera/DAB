@@ -10,10 +10,11 @@ body {
 }
 
 .main-page {
-  &__menu-left-add:link,
-  &__menu-left-add:visited {
-    font-size: 1.8rem;
+  &__nav-list-link:link,
+  &__nav-list-link:visited {
+    font-size: 1.4rem;
     font-weight: 600;
+    color: $color-text-gray;
   }
   &__content-center-stats {
     font-size: 3rem;
