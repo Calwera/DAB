@@ -1,9 +1,12 @@
-const dodaj = document.querySelector(".dodaj");
+"use strict";
+const nav = document.querySelectorAll(".main-page__nav-list-item");
 const close_popup = document.querySelector(".popup__add-exit");
 const popup = document.querySelector(".popup");
 
-dodaj.addEventListener("click", function () {
-  popup.style.display = "block";
+nav.forEach((button) => {
+  button.addEventListener("click", function () {
+    popup.style.display = "block";
+  });
 });
 
 // dodaj.addEventListener("click", function () {
