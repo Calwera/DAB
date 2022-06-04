@@ -9,6 +9,6 @@ nav.forEach((button) => {
   });
 });
 
-// dodaj.addEventListener("click", function () {
-//   popup.style.display = "none";
-// });
+close_popup.addEventListener("click", function () {
+  popup.style.display = "none";
+});
