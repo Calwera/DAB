@@ -21,7 +21,11 @@
         <nav class="main-page__nav">
           <ul class="main-page__nav-list">
             <li class="main-page__nav-list-item">
-              <a href="#" class="main-page__nav-list-link">
+              <a
+                href="#"
+                data-modal-target="#add"
+                class="main-page__nav-list-link"
+              >
                 <img class="main-page__nav-icon" src="img/add.svg" alt="add" />
                 <span>dodaj</span></a
               >
@@ -97,37 +101,37 @@
 
       <!-- POPUPS -->
       <!-- DODAJ -->
-      <div class="popup">
-        <div class="popup__add">
-          <h2 class="popup__add-title">Dodaj</h2>
-          <img src="/img/x_icon.svg" alt="X" class="popup__add-exit" />
-          <form action="POST" method="post" class="popup__add-form">
-            <div>
-              <label for="category" class="popup__add-form-select"
-                >Wybierz kategorie</label
-              >
-              <select id="category">
-                <option value="">Wybierz Kategorie</option>
-                <option value="Jedzenie">Jedzenie</option>
-                <option value="Rachunki">Rachunki</option>
-                <option value="Zakupy">Zakupy</option>
-                <option value="Raty">Raty</option>
-                <option value="Inne">Inne</option>
-              </select>
-            </div>
-            <div>
-              <label for="value">Kwota</label>
-              <input type="number" id="value" placeholder="0" required />
-            </div>
-            <div>
-              <label for="opis">Opis</label>
-              <input type="text" id="opis" placeholder="zakupy" />
-            </div>
-            <button class="btn">Wyslij</button>
-          </form>
-          <!-- USUN -->
+      <div class="popup" id="add">
+        <div class="popup__header">
+          <h2 class="popup__title">Dodaj</h2>
+          <button class="popup__close-button">&times;</button>
         </div>
+        <form action="POST" method="post" class="popup__form">
+          <div>
+            <label for="category" class="popup__form-select"
+              >Wybierz kategorie</label
+            >
+            <select id="category">
+              <option value="">Wybierz Kategorie</option>
+              <option value="Jedzenie">Jedzenie</option>
+              <option value="Rachunki">Rachunki</option>
+              <option value="Zakupy">Zakupy</option>
+              <option value="Raty">Raty</option>
+              <option value="Inne">Inne</option>
+            </select>
+          </div>
+          <div>
+            <label for="value">Kwota</label>
+            <input type="number" id="value" placeholder="0" required />
+          </div>
+          <div>
+            <label for="opis">Opis</label>
+            <input type="text" id="opis" placeholder="zakupy" />
+          </div>
+          <button class="btn">Wyslij</button>
+        </form>
       </div>
+      <div class="popup__overlay"></div>
     </div>
     <script src="./js/script.js"></script>
   </body>

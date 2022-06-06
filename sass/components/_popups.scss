@@ -1,67 +1,83 @@
 .popup {
-  display: none;
-  height: 100vh;
-  width: 100%;
   position: fixed;
-  top: 0;
-  left: 0;
-  background-color: rgba($color-black, 0.75);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 0.2s ease-in-out;
+  background-color: #fff;
+  border-radius: 10px;
   z-index: 10;
+  width: 50rem;
+  max-width: 80%;
 
-  &__add {
-    width: 75%;
-    height: 50rem;
-    background-color: #fff;
-    box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: 5px;
-
-    &-exit {
-      position: absolute;
-      height: 3rem;
-      width: 3rem;
-      right: 0;
-      top: 0;
-      cursor: pointer;
+  &.active {
+    transform: translate(-50%, -50%) scale(1);
+  }
+  &__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(#000000, 0.5);
+    transition: 0.2s ease-in-out;
+    pointer-events: none;
+    opacity: 0;
+    &.active {
+      opacity: 1;
+      pointer-events: all;
     }
+  }
 
-    &-title {
-      font-size: 8rem;
+  &__header {
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__header &__close-button {
+    cursor: pointer;
+    border: none;
+    outline: none;
+    background: none;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+
+  &__title {
+    font-size: 2rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  &__form {
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 2rem;
+    text-transform: uppercase;
+    gap: 2rem;
+
+    input {
+      margin-left: 2rem;
+      font-size: 1.5rem;
       text-align: center;
-      text-transform: uppercase;
+    }
+    select {
+      font-size: 1.5rem;
+      margin-left: 2rem;
     }
 
-    &-form {
+    .btn {
+      padding: 2rem 4rem;
+      margin-top: 4rem;
+      border-radius: 10rem;
+      text-decoration: none;
+      color: #fff;
+      background-color: $color-primary;
       font-size: 2rem;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin: 2rem;
-      text-transform: uppercase;
-      gap: 2rem;
-
-      input {
-        margin-left: 2rem;
-        font-size: 1.5rem;
-        text-align: center;
-      }
-      select {
-        font-size: 1.5rem;
-        margin-left: 2rem;
-      }
-
-      .btn {
-        padding: 2rem 4rem;
-        margin-top: 4rem;
-        border-radius: 10rem;
-        text-decoration: none;
-        color: #fff;
-        background-color: $color-primary;
-        font-size: 2rem;
-      }
     }
   }
 }
