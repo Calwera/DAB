@@ -2,7 +2,6 @@
   display: flex;
 
   &__nav {
-    height: 80rem;
     background-color: $color-primary-light;
 
     &-list {
@@ -55,7 +54,7 @@
 
   &__content-center {
     background-color: $color-background;
-    height: 100rem;
+    height: 100vh;
     flex: 4;
 
     &-title {
