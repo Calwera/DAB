@@ -9,6 +9,8 @@
   z-index: 10;
   width: 50rem;
   max-width: 80%;
+  overflow: hidden;
+  background-color: $color-primary-light;
 
   &.active {
     transform: translate(-50%, -50%) scale(1);
@@ -34,6 +36,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: $color-primary-dark;
   }
 
   &__header &__close-button {
@@ -41,7 +44,7 @@
     border: none;
     outline: none;
     background: none;
-    font-size: 1.25rem;
+    font-size: 3rem;
     font-weight: bold;
   }
 
@@ -55,29 +58,44 @@
     font-size: 2rem;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
     margin: 2rem;
     text-transform: uppercase;
     gap: 2rem;
+    margin-right: 4rem;
 
     input {
-      margin-left: 2rem;
+      margin-left: 1rem;
       font-size: 1.5rem;
       text-align: center;
+      padding: 0.5rem 2rem;
+      border: none;
+      border-radius: 10px;
+      width: 20rem;
     }
     select {
       font-size: 1.5rem;
-      margin-left: 2rem;
+      margin-left: 1rem;
+      padding: 0.5rem 2rem;
+      border: none;
+      border-radius: 10px;
+      width: 20rem;
+    }
+
+    label {
+      margin-left: 1rem;
     }
 
     .btn {
-      padding: 2rem 4rem;
+      padding: 1rem 3rem;
       margin-top: 4rem;
-      border-radius: 10rem;
+      border-radius: 20px;
       text-decoration: none;
       color: #fff;
-      background-color: $color-primary;
+      background-color: $color-primary-dark;
       font-size: 2rem;
+      align-self: center;
+      border: none;
     }
   }
 }

@@ -100,19 +100,19 @@
       </section>
 
       <!-- POPUPS -->
-      <!-- DODAJ -->
+      <!-- DODAWANIE KOSZTÓW -->
       <div class="popup" id="add">
         <div class="popup__header">
-          <h2 class="popup__title">Dodaj</h2>
+          <h2 class="popup__title">Dodaj koszt</h2>
           <button class="popup__close-button">&times;</button>
         </div>
         <form action="POST" method="post" class="popup__form">
           <div>
             <label for="category" class="popup__form-select"
-              >Wybierz kategorie</label
+              >Kategoria kosztów</label
             >
             <select id="category">
-              <option value="">Wybierz Kategorie</option>
+              <option value="">Kategorie</option>
               <option value="Jedzenie">Jedzenie</option>
               <option value="Rachunki">Rachunki</option>
               <option value="Zakupy">Zakupy</option>
@@ -123,6 +123,12 @@
           <div>
             <label for="value">Kwota</label>
             <input type="number" id="value" placeholder="0" required />
+          </div>
+          <div>
+            <label>
+              Wprowadź date
+              <input type="date" />
+            </label>
           </div>
           <div>
             <label for="opis">Opis</label>
