@@ -2,8 +2,17 @@ body {
   color: $color-text-gray;
 }
 
-.general-form {
-  font-size: 1.2rem;
+.general--form {
+  font-size: 1.4rem;
+
+  &__log-input {
+    font-size: 1.2rem;
+  }
+
+  &__passw-field {
+    font-size: 1.2rem;
+  }
+
   &__btn {
     font-size: 1.6rem;
   }
@@ -20,5 +29,14 @@ body {
     font-size: 3rem;
     font-weight: 700;
     text-transform: uppercase;
+  }
+}
+.footer {
+  &__header {
+    font-size: 1.2rem;
+  }
+
+  &__text {
+    font-size: 1.2rem;
   }
 }

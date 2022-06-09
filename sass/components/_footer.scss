@@ -1,0 +1,13 @@
+.footer {
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+  gap: 4rem;
+  background-color: $color-primary-light;
+  &__link {
+    &-img {
+      height: 2rem;
+      margin: 0 0.5rem;
+    }
+  }
+}

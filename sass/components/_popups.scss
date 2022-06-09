@@ -98,6 +98,7 @@
       border: none;
       cursor: pointer;
       transition: all 0.2s;
+      box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
 
       &:hover {
         transform: translateY(-3px);
