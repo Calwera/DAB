@@ -3,7 +3,10 @@
 
   &__nav {
     background-color: $color-primary-light;
-
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
     &-list {
       list-style: none;
       margin-top: 3.5rem;
