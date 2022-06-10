@@ -1,13 +1,13 @@
 .footer {
   display: flex;
   justify-content: center;
-  align-content: space-around;
+  align-items: center;
   gap: 4rem;
-  background-color: $color-primary-light;
+  background-color: $color-primary-dark;
   &__link {
     &-img {
       height: 2rem;
-      margin: 0 0.5rem;
+      margin: 0.5rem 0.5rem;
     }
   }
 }
