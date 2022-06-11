@@ -53,7 +53,11 @@
               >
             </li>
             <li class="main-page__nav-list-item">
-              <a href="#" class="main-page__nav-list-link">
+              <a
+                href="#"
+                data-modal-target="#show"
+                class="main-page__nav-list-link"
+              >
                 <img
                   class="main-page__nav-icon"
                   src="img/showall.svg"
@@ -140,6 +144,36 @@
             <input type="text" id="opis" placeholder="zakupy" />
           </div>
           <button class="btn">Wyslij</button>
+        </form>
+      </div>
+
+      <!-- Popup wyświetl -->
+      <div class="popup" id="show">
+        <div class="popup__header">
+          <h2 class="popup__title">Wyświetl zawartość</h2>
+          <button class="popup__close-button">&times;</button>
+        </div>
+        <form class="popup__form">
+          <div>
+            <label for="category" class="popup__form-select"
+              >Kategoria kosztów</label
+            >
+            <select id="category">
+              <option value="">Kategorie</option>
+              <option value="Jedzenie">Jedzenie</option>
+              <option value="Rachunki">Rachunki</option>
+              <option value="Zakupy">Zakupy</option>
+              <option value="Raty">Raty</option>
+              <option value="Inne">Inne</option>
+              <option value="Wszystko">wszystko</option>
+            </select>
+          </div>
+          <div>
+            <label>
+              Wprowadź date
+              <input type="date" />
+            </label>
+          </div>
         </form>
       </div>
       <div class="popup__overlay"></div>
