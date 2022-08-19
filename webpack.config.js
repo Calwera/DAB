@@ -12,9 +12,20 @@ module.exports = {
         loader: "babel-loader",
         options: { presets: ["@babel/env"] },
       },
+
       {
         test: /\.css$/,
         use: ["style-loader", "css-loader"],
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: "file-loader",
+        options: {
+          name: "/public/icons/[name].[ext]",
+          type: "asset/resource",
+          outputPath: "img",
+          esModule: false,
+        },
       },
     ],
   },
@@ -26,7 +37,7 @@ module.exports = {
   },
   devServer: {
     contentBase: path.join(__dirname, "public/"),
-    port: 3000,
+    port: 4000,
     publicPath: "http://localhost:3000/dist/",
     hotOnly: true,
   },
