@@ -1,11 +1,13 @@
 import React from "react";
 import "../css/style.css";
+import Card from "./components/UI/Card";
+import LoginScreen from "./components/LoginScreen";
 
 function App() {
   return (
-    <div className="background-image">
-      <div className="general">Hello</div>
-    </div>
+    <Card>
+      <LoginScreen />
+    </Card>
   );
 }
 
