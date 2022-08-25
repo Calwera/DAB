@@ -11,9 +11,18 @@ const LoginForm = () => {
     reset: nameReset,
   } = useInput((value) => value.trim() !== ""); //poprawic warunek
 
+  const {
+    value: enteredPassword,
+    isValid: enteredPasswordIsValid,
+    hasError: passwordInputHasError,
+    valueChangedHandler: passwordChangeHandler,
+    inputBlurHandler: passwordBlurHandler,
+    reset: passwordReset,
+  } = useInput((value) => value.trim() !== "");
+
   let formIsValid = false;
 
-  if (enteredNameIsValid) {
+  if (enteredNameIsValid && enteredPasswordIsValid) {
     formIsValid = true;
   }
 
@@ -21,12 +30,18 @@ const LoginForm = () => {
     event.preventDefault();
     if (!formIsValid) return;
     console.log(enteredName);
+    console.log(enteredPassword);
     nameReset();
+    passwordReset();
   };
 
   const nameInputClasses = nameInputHasError
     ? " invalid"
     : "general--form__log-input";
+
+  const passwordInputClasses = passwordInputHasError
+    ? "invalid"
+    : "general--form__passw-field ";
 
   return (
     <form onSubmit={formSubmitHandler} className="general--form">
@@ -50,9 +65,13 @@ const LoginForm = () => {
           <input
             type="password"
             id="password"
-            className="general--form__passw-field"
+            className={passwordInputClasses}
             placeholder="HASŁO"
+            onChange={passwordChangeHandler}
+            onBlur={passwordBlurHandler}
+            value={enteredPassword}
           />
+          {passwordInputHasError && <p>Password must not be empty</p>}
         </label>
         <button className="general--form__btn">Zaloguj</button>
       </div>
