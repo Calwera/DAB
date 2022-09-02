@@ -2,12 +2,15 @@ import React from "react";
 import "../css/style.css";
 import Card from "./components/UI/Card";
 import LoginScreen from "./components/LoginScreen";
+import { AuthProvider } from "./contexts/AuthContext";
 
 function App() {
   return (
-    <Card>
-      <LoginScreen />
-    </Card>
+    <AuthProvider>
+      <Card>
+        <LoginScreen />
+      </Card>
+    </AuthProvider>
   );
 }
 

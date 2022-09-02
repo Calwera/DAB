@@ -1,5 +1,6 @@
 import React from "react";
 import useInput from "../hooks/use-input";
+import { useAuth } from "../contexts/AuthContext";
 
 const LoginForm = () => {
   const {
@@ -20,6 +21,8 @@ const LoginForm = () => {
     reset: passwordReset,
   } = useInput((value) => value.trim() !== "");
 
+  const { login } = useAuth();
+
   let formIsValid = false;
 
   if (enteredNameIsValid && enteredPasswordIsValid) {
@@ -29,14 +32,14 @@ const LoginForm = () => {
   const formSubmitHandler = (event) => {
     event.preventDefault();
     if (!formIsValid) return;
-    console.log(enteredName);
-    console.log(enteredPassword);
+
+    login(enteredName, enteredPassword);
     nameReset();
     passwordReset();
   };
 
   const nameInputClasses = nameInputHasError
-    ? " invalid"
+    ? "invalid"
     : "general--form__log-input";
 
   const passwordInputClasses = passwordInputHasError
@@ -73,7 +76,9 @@ const LoginForm = () => {
           />
           {passwordInputHasError && <p>Password must not be empty</p>}
         </label>
-        <button className="general--form__btn">Zaloguj</button>
+        <button className="general--form__btn" type="submit">
+          Zaloguj
+        </button>
       </div>
     </form>
   );
