@@ -1,16 +1,16 @@
 import React from "react";
 import "../css/style.css";
-import Card from "./components/UI/Card";
+import MainPage from "./components/MainPage";
 import LoginScreen from "./components/LoginScreen";
-import { AuthProvider } from "./contexts/AuthContext";
+
+import { Routes, Route } from "react-router-dom";
 
 function App() {
   return (
-    <AuthProvider>
-      <Card>
-        <LoginScreen />
-      </Card>
-    </AuthProvider>
+    <Routes>
+      <Route path="/" element={<MainPage />} />
+      <Route path="/login" exact element={<LoginScreen />} />
+    </Routes>
   );
 }
 

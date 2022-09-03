@@ -32,8 +32,8 @@ module.exports = {
   },
   resolve: { extensions: ["*", ".js", ".jsx"] },
   output: {
-    path: path.resolve(__dirname, "dist/"),
-    publicPath: "/dist/",
+    path: path.resolve(__dirname, "dist"),
+    publicPath: "/",
     filename: "bundle.js",
   },
   devServer: {
@@ -41,6 +41,7 @@ module.exports = {
     port: 4000,
     publicPath: "http://localhost:3000/dist/",
     hotOnly: true,
+    historyApiFallback: true, // React routing enabled
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
