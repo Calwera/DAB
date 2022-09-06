@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import useInput from "../hooks/use-input";
 import { useAuth } from "../contexts/AuthContext";
 
 const LoginForm = () => {
+  const [error, setError] = useState("");
   const {
     value: enteredName,
     isValid: enteredNameIsValid,
@@ -29,13 +30,16 @@ const LoginForm = () => {
     formIsValid = true;
   }
 
-  const formSubmitHandler = (event) => {
+  const formSubmitHandler = async (event) => {
     event.preventDefault();
     if (!formIsValid) return;
-
-    login(enteredName, enteredPassword);
-    nameReset();
-    passwordReset();
+    try {
+      await login(enteredName, enteredPassword);
+      nameReset();
+      passwordReset();
+    } catch {
+      setError("Failed to log in");
+    }
   };
 
   const nameInputClasses = nameInputHasError
@@ -49,6 +53,7 @@ const LoginForm = () => {
   return (
     <form onSubmit={formSubmitHandler} className="general--form">
       <div className="general--form__first">
+        {error && <p>{error}</p>}
         <label htmlFor="log" className="general--form__login">
           Nazwa Uzytkownika
         </label>
