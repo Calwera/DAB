@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import useInput from "../hooks/use-input";
 import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
+  const navigate = useNavigate();
   const [error, setError] = useState("");
   const {
     value: enteredName,
@@ -22,7 +24,7 @@ const LoginForm = () => {
     reset: passwordReset,
   } = useInput((value) => value.trim() !== "");
 
-  const { login } = useAuth();
+  const { login, currentUser } = useAuth();
 
   let formIsValid = false;
 
@@ -37,6 +39,7 @@ const LoginForm = () => {
       await login(enteredName, enteredPassword);
       nameReset();
       passwordReset();
+      navigate("/");
     } catch {
       setError("Failed to log in");
     }
