@@ -7,6 +7,7 @@ import Navbar from "./Navbar";
 
 const MainPage = () => {
   const [addShown, setAddShown] = useState(false);
+  const [cost, setCost] = useState([]);
 
   const showAddHandler = () => {
     setAddShown(true);
@@ -16,14 +17,22 @@ const MainPage = () => {
     setAddShown(false);
   };
 
+  const addCost = (cost) => {
+    setCost((prevCost) => {
+      return [...prevCost, cost];
+    });
+  };
+
   return (
     <Fragment>
       <section className="main-page">
         <Navbar onAddShow={showAddHandler} />
         <div className="main-page__content-center">
           <Header />
-          <MainContent />
-          {addShown && <AddModal closeAddModal={hideAddHandler} />}
+          <MainContent costAdded={cost} />
+          {addShown && (
+            <AddModal closeAddModal={hideAddHandler} addCost={addCost} />
+          )}
         </div>
       </section>
       <Footer />

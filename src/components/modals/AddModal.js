@@ -1,6 +1,25 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useRef } from "react";
 
 const AddModal = (props) => {
+  const category = useRef();
+  const price = useRef();
+  const date = useRef();
+  const description = useRef();
+
+  const submitHandler = (event) => {
+    event.preventDefault();
+
+    const costEntry = {
+      category: category.current.value,
+      price: price.current.value,
+      date: date.current.value,
+      description: description.current.value,
+    };
+
+    props.addCost(costEntry);
+    props.closeAddModal();
+  };
+
   return (
     <Fragment>
       <div className="popup active" id="add">
@@ -10,12 +29,12 @@ const AddModal = (props) => {
             &times;
           </button>
         </div>
-        <form className="popup__form">
+        <form className="popup__form" onSubmit={submitHandler}>
           <div>
             <label htmlFor="category" className="popup__form-select">
               Kategoria kosztów
             </label>
-            <select id="category">
+            <select id="category" ref={category}>
               <option value="">Kategorie</option>
               <option value="Jedzenie">Jedzenie</option>
               <option value="Rachunki">Rachunki</option>
@@ -31,18 +50,24 @@ const AddModal = (props) => {
               step="0.01"
               id="value"
               placeholder="0"
+              ref={price}
               required
             />
           </div>
           <div>
             <label>
               Wprowadź date
-              <input type="date" />
+              <input type="date" ref={date} />
             </label>
           </div>
           <div>
             <label htmlFor="opis">Opis</label>
-            <input type="text" id="opis" placeholder="zakupy" />
+            <input
+              type="text"
+              id="opis"
+              placeholder="zakupy"
+              ref={description}
+            />
           </div>
           <button className="btn">Wyslij</button>
         </form>

@@ -1,9 +1,10 @@
 import React from "react";
+import CostEntry from "./CostEntry";
 
-const MainContent = () => {
+const MainContent = (props) => {
   return (
     <div className="main-page__content-center-stats">
-      <div className="main-page__content-center-stats-income">
+      {/* <div className="main-page__content-center-stats-income">
         <div className="main-page__content-center-stats-income-name">
           Dochody
         </div>
@@ -31,7 +32,10 @@ const MainContent = () => {
           3020
           <button className="popup__close-button">+</button>
         </div>
-      </div>
+      </div> */}
+      {props.costAdded.map((item) => (
+        <CostEntry cost={item} />
+      ))}
     </div>
   );
 };
