@@ -63,8 +63,9 @@
 
   &__content-center {
     background-color: $color-background;
-    height: 100vh;
     flex: 4;
+    min-height: 90vh;
+    list-style: none;
 
     &-title {
       text-align: center;
@@ -76,21 +77,14 @@
 
     &-stats {
       display: flex;
-      gap: 5rem;
-      margin: 3rem;
-      align-items: center;
-      justify-content: center;
+      background-color: $color-primary-light;
       border: 3px solid $color-primary-dark;
       border-radius: 10px;
-      padding: 2rem;
       box-shadow: 2px 4px 8px rgba(0, 0, 0, 0.2);
-      background-color: $color-primary-light;
-      &-income-number {
-        color: $color-text-green;
-      }
-      &-outcome-number {
-        color: $color-text-red;
-      }
+      font-size: 1.6rem;
+      gap: 2rem;
+      margin: 2rem;
+      padding: 2rem;
     }
   }
 }

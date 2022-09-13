@@ -23,13 +23,22 @@ const MainPage = () => {
     });
   };
 
+  const deleteCost = (id) => {
+    setCost((prevCost) => {
+      const cost = prevCost.filter((ele) => {
+        return ele.id !== id;
+      });
+      return cost;
+    });
+  };
+
   return (
     <Fragment>
       <section className="main-page">
         <Navbar onAddShow={showAddHandler} />
         <div className="main-page__content-center">
           <Header />
-          <MainContent costAdded={cost} />
+          <MainContent costArray={cost} filterCostArray={deleteCost} />
           {addShown && (
             <AddModal closeAddModal={hideAddHandler} addCost={addCost} />
           )}

@@ -14,6 +14,7 @@ const AddModal = (props) => {
       price: price.current.value,
       date: date.current.value,
       description: description.current.value,
+      id: Math.random().toString(),
     };
 
     props.addCost(costEntry);
