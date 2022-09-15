@@ -32,13 +32,22 @@ const MainPage = () => {
     });
   };
 
+  const releaseCostArray = () => {
+    setCost([]);
+    return cost;
+  };
+
   return (
     <Fragment>
       <section className="main-page">
         <Navbar onAddShow={showAddHandler} />
         <div className="main-page__content-center">
           <Header />
-          <MainContent costArray={cost} filterCostArray={deleteCost} />
+          <MainContent
+            costArray={cost}
+            deleteCostArray={releaseCostArray}
+            filterCostArray={deleteCost}
+          />
           {addShown && (
             <AddModal closeAddModal={hideAddHandler} addCost={addCost} />
           )}

@@ -70,7 +70,7 @@ const AddModal = (props) => {
               ref={description}
             />
           </div>
-          <button className="btn">Wyslij</button>
+          <button className="btn">Zapisz</button>
         </form>
       </div>
       <div className="popup__overlay"></div>
