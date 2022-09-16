@@ -61,26 +61,31 @@ const MainPage = () => {
 
   return (
     <Fragment>
-      <section className="main-page">
-        <Navbar onAddShow={showAddHandler} onDisplayShow={showDisplayHandler} />
-        <div className="main-page__content-center">
-          <Header />
-          <MainContent
-            costArray={cost}
-            deleteCostArray={releaseCostArray}
-            filterCostArray={deleteCost}
+      <div className="background-image">
+        <section className="main-page">
+          <Navbar
+            onAddShow={showAddHandler}
+            onDisplayShow={showDisplayHandler}
           />
-          {addShown && (
-            <AddModal closeAddModal={hideAddHandler} addCost={addCost} />
-          )}
-          {displayShown && (
-            <ShowModal
-              closeDisplayModal={hideDisplayHandler}
-              onDisplaySavedCost={displaySavedCost}
+          <div className="main-page__content-center">
+            <Header />
+            <MainContent
+              costArray={cost}
+              deleteCostArray={releaseCostArray}
+              filterCostArray={deleteCost}
             />
-          )}
-        </div>
-      </section>
+            {addShown && (
+              <AddModal closeAddModal={hideAddHandler} addCost={addCost} />
+            )}
+            {displayShown && (
+              <ShowModal
+                closeDisplayModal={hideDisplayHandler}
+                onDisplaySavedCost={displaySavedCost}
+              />
+            )}
+          </div>
+        </section>
+      </div>
       <Footer />
     </Fragment>
   );

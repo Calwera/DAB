@@ -22,9 +22,9 @@ module.exports = {
         test: /\.(jpe?g|png|gif|svg)$/i,
         loader: "file-loader",
         options: {
-          name: "/public/icons/[name].[ext]",
+          name: "./icons/[name].[ext]",
           type: "asset/resource",
-          outputPath: "img",
+          // outputPath: "img",
           esModule: false,
         },
       },
