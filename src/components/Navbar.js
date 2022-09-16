@@ -1,26 +1,6 @@
 import React from "react";
 
 const Navbar = (props) => {
-  const showHandler = async () => {
-    try {
-      const response = await fetch(
-        "https://domowa-aplikacja-budzetu-44d26-default-rtdb.europe-west1.firebasedatabase.app/cost.json"
-      );
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error("Cannot fetch data");
-      }
-      console.log(data);
-      // OSO CHODZI!!!!
-      const array = Object.keys(data)
-        .map((key) => data[key])
-        .reduce((acc, val) => [...acc, ...val]);
-      console.log(array);
-    } catch (error) {
-      console.log(error.message);
-    }
-  };
-
   return (
     <nav className="main-page__nav">
       <ul className="main-page__nav-list">
@@ -54,11 +34,14 @@ const Navbar = (props) => {
               src="icons/remove.svg"
               alt="Delete"
             />
-            usun
+            usuń
           </button>
         </li>
         <li className="main-page__nav-list-item">
-          <button onClick={showHandler} className="main-page__nav-list-link">
+          <button
+            onClick={props.onDisplayShow}
+            className="main-page__nav-list-link"
+          >
             <img
               className="main-page__nav-icon"
               src="icons/show.svg"
