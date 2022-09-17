@@ -47,17 +47,20 @@ const Navbar = (props) => {
               src="icons/show.svg"
               alt="show"
             />
-            wyświetl
+            wyświetl koszta
           </button>
         </li>
         <li className="main-page__nav-list-item">
-          <button className="main-page__nav-list-link">
+          <button
+            onClick={props.onSummaryShow}
+            className="main-page__nav-list-link"
+          >
             <img
               className="main-page__nav-icon"
               src="icons/showall.svg"
               alt="showall"
             />
-            wyświetl wszystko
+            Podsumuj
           </button>
         </li>
       </ul>

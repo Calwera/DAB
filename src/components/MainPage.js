@@ -4,11 +4,14 @@ import Header from "./Header";
 import MainContent from "./MainContent";
 import AddModal from "./modals/AddModal";
 import ShowModal from "./modals/ShowModal";
+import SummaryModal from "./modals/SummaryModal";
 import Navbar from "./Navbar";
+import useShow from "../hooks/use-show"; // DOpisac custom hook'a
 
 const MainPage = () => {
   const [addShown, setAddShown] = useState(false);
   const [displayShown, setDisplayShown] = useState(false);
+  const [summaryShown, setSummaryShown] = useState(false);
   const [cost, setCost] = useState([]);
 
   const showAddHandler = () => {
@@ -25,6 +28,14 @@ const MainPage = () => {
 
   const hideDisplayHandler = () => {
     setDisplayShown(false);
+  };
+
+  const showSummaryHandler = () => {
+    setSummaryShown(true);
+  };
+
+  const hideSummaryHandler = () => {
+    setSummaryShown(false);
   };
 
   const addCost = (cost) => {
@@ -49,14 +60,31 @@ const MainPage = () => {
 
   const displaySavedCost = (array) => {
     releaseCostArray();
+
     if (array.category) {
+      if (array.category === "Wszystko") {
+        const filteredArray = array.cost.filter(
+          (cost) => cost.date >= array.dateFrom && cost.date <= array.dateTo
+        );
+        filteredArray.forEach((item) => addCost(item));
+        return;
+      }
+
       const filteredArray = array.cost.filter(
-        (cost) => cost.category === array.category
+        (cost) =>
+          cost.category === array.category &&
+          cost.date >= array.dateFrom &&
+          cost.date <= array.dateTo
       );
+
       filteredArray.forEach((item) => addCost(item));
     } else {
       array.cost.forEach((item) => addCost(item));
     }
+  };
+
+  const showSummary = (sum) => {
+    console.log(sum);
   };
 
   return (
@@ -66,6 +94,7 @@ const MainPage = () => {
           <Navbar
             onAddShow={showAddHandler}
             onDisplayShow={showDisplayHandler}
+            onSummaryShow={showSummaryHandler}
           />
           <div className="main-page__content-center">
             <Header />
@@ -81,6 +110,12 @@ const MainPage = () => {
               <ShowModal
                 closeDisplayModal={hideDisplayHandler}
                 onDisplaySavedCost={displaySavedCost}
+              />
+            )}
+            {summaryShown && (
+              <SummaryModal
+                closeSummaryModal={hideSummaryHandler}
+                onSummaryShow={showSummary}
               />
             )}
           </div>

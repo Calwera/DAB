@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 
-const ShowModal = (props) => {
+const SummaryModal = (props) => {
   const category = useRef();
   const dateFrom = useRef();
   const dateTo = useRef();
@@ -17,18 +17,36 @@ const ShowModal = (props) => {
         throw new Error("Cannot fetch data");
       }
 
+      const conditions = {
+        category: category.current.value,
+        dateFrom: dateFrom.current.value,
+        dateTo: dateTo.current.value,
+      };
+
       const array = Object.keys(data)
         .map((key) => data[key])
         .reduce((acc, val) => [...acc, ...val]);
-      const costArrayAndCondition = {
-        cost: array,
-        dateFrom: dateFrom.current.value,
-        dateTo: dateTo.current.value,
-        category: category.current.value,
-      };
 
-      props.onDisplaySavedCost(costArrayAndCondition);
-      props.closeDisplayModal();
+      if (conditions.category === "Wszystko") {
+        const totalAmount = array
+          .filter(
+            (item) =>
+              item.date >= conditions.dateFrom && item.date <= conditions.dateTo
+          )
+          .reduce((prev, curr) => prev + +curr.price, 0);
+        props.onSummaryShow(totalAmount);
+      } else {
+        const totalAmount = array
+          .filter(
+            (item) =>
+              item.category === conditions.category &&
+              item.date >= conditions.dateFrom &&
+              item.date <= conditions.dateTo
+          )
+          .reduce((prev, curr) => prev + +curr.price, 0);
+        props.onSummaryShow(totalAmount);
+      }
+      props.closeSummaryModal();
     } catch (error) {
       console.log(error.message);
     }
@@ -40,7 +58,7 @@ const ShowModal = (props) => {
         <h2 className="popup__title">Wyświetl zawartość</h2>
         <button
           className="popup__close-button"
-          onClick={props.closeDisplayModal}
+          onClick={props.closeSummaryModal}
         >
           &times;
         </button>
@@ -73,4 +91,4 @@ const ShowModal = (props) => {
   );
 };
 
-export default ShowModal;
+export default SummaryModal;
