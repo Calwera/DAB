@@ -9,34 +9,25 @@ import Navbar from "./Navbar";
 import useShow from "../hooks/use-show"; // DOpisac custom hook'a
 
 const MainPage = () => {
-  const [addShown, setAddShown] = useState(false);
-  const [displayShown, setDisplayShown] = useState(false);
-  const [summaryShown, setSummaryShown] = useState(false);
   const [cost, setCost] = useState([]);
 
-  const showAddHandler = () => {
-    setAddShown(true);
-  };
+  const {
+    show: addShown,
+    showHandler: showAddHandler,
+    hideHandler: hideAddHandler,
+  } = useShow();
 
-  const hideAddHandler = () => {
-    setAddShown(false);
-  };
+  const {
+    show: summaryShown,
+    showHandler: showSummaryHandler,
+    hideHandler: hideSummaryHandler,
+  } = useShow();
 
-  const showDisplayHandler = () => {
-    setDisplayShown(true);
-  };
-
-  const hideDisplayHandler = () => {
-    setDisplayShown(false);
-  };
-
-  const showSummaryHandler = () => {
-    setSummaryShown(true);
-  };
-
-  const hideSummaryHandler = () => {
-    setSummaryShown(false);
-  };
+  const {
+    show: displayShown,
+    showHandler: showDisplayHandler,
+    hideHandler: hideDisplayHandler,
+  } = useShow();
 
   const addCost = (cost) => {
     setCost((prevCost) => {
