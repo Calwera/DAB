@@ -34,7 +34,8 @@ const SummaryModal = (props) => {
               item.date >= conditions.dateFrom && item.date <= conditions.dateTo
           )
           .reduce((prev, curr) => prev + +curr.price, 0);
-        props.onSummaryShow(totalAmount);
+        const summary = { ...conditions, amount: totalAmount };
+        props.onSummaryShow(summary);
       } else {
         const totalAmount = array
           .filter(
@@ -44,7 +45,8 @@ const SummaryModal = (props) => {
               item.date <= conditions.dateTo
           )
           .reduce((prev, curr) => prev + +curr.price, 0);
-        props.onSummaryShow(totalAmount);
+        const summary = { ...conditions, amount: totalAmount };
+        props.onSummaryShow(summary);
       }
       props.closeSummaryModal();
     } catch (error) {
@@ -55,7 +57,7 @@ const SummaryModal = (props) => {
   return (
     <div className="popup active">
       <div className="popup__header">
-        <h2 className="popup__title">Wyświetl zawartość</h2>
+        <h2 className="popup__title">Podsumuj</h2>
         <button
           className="popup__close-button"
           onClick={props.closeSummaryModal}

@@ -78,6 +78,8 @@
 
     &-stats {
       display: flex;
+      flex-direction: column;
+      justify-content: space-between;
       background-color: $color-primary-light;
       border: 3px solid $color-primary-dark;
       border-radius: 10px;
@@ -86,6 +88,10 @@
       gap: 2rem;
       margin: 2rem;
       padding: 2rem;
+      &-income-name {
+        display: flex;
+        justify-content: space-around;
+      }
     }
   }
 }

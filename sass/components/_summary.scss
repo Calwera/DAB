@@ -1,0 +1,17 @@
+.summary {
+   display: flex;
+   flex-direction: column;
+   justify-content: space-between;
+   margin: 0 auto;
+   padding: 5rem;
+   height: 30vh;
+
+
+    &__label {
+        font-size: 2rem;
+    }
+
+    &__values {
+        font-size: 3rem;
+    }
+}

@@ -5,11 +5,13 @@ import MainContent from "./MainContent";
 import AddModal from "./modals/AddModal";
 import ShowModal from "./modals/ShowModal";
 import SummaryModal from "./modals/SummaryModal";
+import SummaryDisplay from "./SummaryDisplay";
 import Navbar from "./Navbar";
-import useShow from "../hooks/use-show"; // DOpisac custom hook'a
+import useShow from "../hooks/use-show";
 
 const MainPage = () => {
   const [cost, setCost] = useState([]);
+  const [summaryValue, setSummaryValue] = useState(null);
 
   const {
     show: addShown,
@@ -75,7 +77,7 @@ const MainPage = () => {
   };
 
   const showSummary = (sum) => {
-    console.log(sum);
+    setSummaryValue(sum);
   };
 
   return (
@@ -89,11 +91,13 @@ const MainPage = () => {
           />
           <div className="main-page__content-center">
             <Header />
+            {summaryValue && <SummaryDisplay summaryArray={summaryValue} />}
             <MainContent
               costArray={cost}
               deleteCostArray={releaseCostArray}
               filterCostArray={deleteCost}
             />
+
             {addShown && (
               <AddModal closeAddModal={hideAddHandler} addCost={addCost} />
             )}
