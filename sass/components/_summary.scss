@@ -1,17 +1,29 @@
 .summary {
-   display: flex;
-   flex-direction: column;
-   justify-content: space-between;
-   margin: 0 auto;
-   padding: 5rem;
-   height: 30vh;
-
-
+    margin: 2rem 1rem;
+    padding: 0 0.5rem;
+    
+    border: 2px solid $color-primary-dark;
+    border-radius: 10px;
+    text-align: center;
+    background-color: $color-primary-light;
+    
     &__label {
+        display: grid;
         font-size: 2rem;
+        grid-template-columns: repeat(4, 1fr);
+        margin: 1rem auto;
+        padding: 1rem 0.5rem;
+        border-bottom: 2px solid $color-primary-dark;
+       
     }
 
     &__values {
-        font-size: 3rem;
+        display: grid;
+        font-size: 2rem;
+        grid-template-columns: repeat(4, 1fr);
+        margin: 1rem auto;
+        padding: 1rem 0.5rem;
+        
+        
     }
 }

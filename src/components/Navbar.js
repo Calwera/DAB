@@ -1,6 +1,16 @@
 import React from "react";
+import { useAuth } from "../contexts/AuthContext";
 
 const Navbar = (props) => {
+  const { logout } = useAuth();
+  const logoutHandler = async () => {
+    try {
+      const logoutSuccesfull = await logout();
+    } catch {
+      setError("Failed to log out");
+    }
+  };
+
   return (
     <nav className="main-page__nav">
       <ul className="main-page__nav-list">
@@ -61,6 +71,11 @@ const Navbar = (props) => {
               alt="showall"
             />
             Podsumuj
+          </button>
+        </li>
+        <li className="main-page__nav-list-item">
+          <button className="main-page__nav-list-link" onClick={logoutHandler}>
+            Wyloguj
           </button>
         </li>
       </ul>

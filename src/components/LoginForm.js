@@ -36,7 +36,8 @@ const LoginForm = () => {
     event.preventDefault();
     if (!formIsValid) return;
     try {
-      await login(enteredName, enteredPassword);
+      const userCredentials = await login(enteredName, enteredPassword);
+
       nameReset();
       passwordReset();
       navigate("/");
