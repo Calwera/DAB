@@ -2,17 +2,18 @@ import React from "react";
 import { useAuth } from "../contexts/AuthContext";
 
 const Navbar = (props) => {
-  const { logout } = useAuth();
+  const { logout, currentUser } = useAuth();
   const logoutHandler = async () => {
     try {
-      const logoutSuccesfull = await logout();
+      await logout();
     } catch {
       setError("Failed to log out");
     }
   };
-
+  // TO DO STYLE USER
   return (
     <nav className="main-page__nav">
+      <div>{currentUser.email}</div>
       <ul className="main-page__nav-list">
         <li className="main-page__nav-list-item">
           <button

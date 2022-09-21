@@ -23,6 +23,7 @@ export function AuthProvider({ children }) {
   const logout = () => {
     return signOut(auth);
   };
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       setCurrentUser(user);

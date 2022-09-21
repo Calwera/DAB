@@ -92,11 +92,16 @@ const MainPage = () => {
           <div className="main-page__content-center">
             <Header />
             {summaryValue && <SummaryDisplay summaryArray={summaryValue} />}
-            <MainContent
-              costArray={cost}
-              deleteCostArray={releaseCostArray}
-              filterCostArray={deleteCost}
-            />
+            {cost.length > 0 && (
+              <MainContent
+                costArray={cost}
+                deleteCostArray={releaseCostArray}
+                filterCostArray={deleteCost}
+              />
+            )}
+            {cost.length === 0 && !summaryValue && (
+              <p>Brak danych do wyświetlenia</p>
+            )}
 
             {addShown && (
               <AddModal closeAddModal={hideAddHandler} addCost={addCost} />

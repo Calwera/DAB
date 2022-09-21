@@ -13,7 +13,13 @@ const LoginForm = () => {
     valueChangedHandler: nameChangeHandler,
     inputBlurHandler: nameBlurHandler,
     reset: nameReset,
-  } = useInput((value) => value.trim() !== ""); //poprawic warunek
+  } = useInput((value) =>
+    value
+      .toLowerCase()
+      .match(
+        /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+      )
+  );
 
   const {
     value: enteredPassword,
@@ -22,9 +28,9 @@ const LoginForm = () => {
     valueChangedHandler: passwordChangeHandler,
     inputBlurHandler: passwordBlurHandler,
     reset: passwordReset,
-  } = useInput((value) => value.trim() !== "");
+  } = useInput((value) => value.trim().length > 5);
 
-  const { login, currentUser } = useAuth();
+  const { login } = useAuth();
 
   let formIsValid = false;
 
@@ -36,7 +42,7 @@ const LoginForm = () => {
     event.preventDefault();
     if (!formIsValid) return;
     try {
-      const userCredentials = await login(enteredName, enteredPassword);
+      await login(enteredName, enteredPassword);
 
       nameReset();
       passwordReset();
@@ -59,7 +65,7 @@ const LoginForm = () => {
       <div className="general--form__first">
         {error && <p>{error}</p>}
         <label htmlFor="log" className="general--form__login">
-          Nazwa Uzytkownika
+          EMAIL
         </label>
 
         <input
@@ -69,9 +75,9 @@ const LoginForm = () => {
           onChange={nameChangeHandler}
           onBlur={nameBlurHandler}
           value={enteredName}
-          placeholder="NAZWA UŻYTKOWNIKA"
+          placeholder="EMAIL"
         />
-        {nameInputHasError && <p>Name must not be empty</p>}
+        {nameInputHasError && <p>Proszę wprowadzić poprawny email</p>}
         <label htmlFor="password" className="general--form__password">
           Hasło
           <input
@@ -83,7 +89,7 @@ const LoginForm = () => {
             onBlur={passwordBlurHandler}
             value={enteredPassword}
           />
-          {passwordInputHasError && <p>Password must not be empty</p>}
+          {passwordInputHasError && <p>Hasło nie może być tak krótkie</p>}
         </label>
         <button className="general--form__btn" type="submit">
           Zaloguj
