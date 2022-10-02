@@ -39,7 +39,10 @@ const Navbar = (props) => {
           </button>
         </li>
         <li className="main-page__nav-list-item">
-          <button className="main-page__nav-list-link">
+          <button
+            className="main-page__nav-list-link"
+            onClick={props.onDeleteShow}
+          >
             <img
               className="main-page__nav-icon"
               src="icons/remove.svg"

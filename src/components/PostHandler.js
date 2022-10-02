@@ -1,13 +1,6 @@
-import React, { Fragment, useState } from "react";
-import CostEntry from "./CostEntry";
+import React, { Fragment } from "react";
 
-const MainContent = (props) => {
-  const [error, setError] = useState(null);
-
-  const deleteItem = (id) => {
-    props.filterCostArray(id);
-  };
-
+const PostHandler = (props) => {
   const confirmHandler = async () => {
     setError(null);
     try {
@@ -38,12 +31,7 @@ const MainContent = (props) => {
   };
 
   return (
-    <Fragment>
-      <ul className="main-page__content-center">
-        {props.costArray.map((item) => (
-          <CostEntry cost={item} key={item.id} deleteHandler={deleteItem} />
-        ))}
-      </ul>
+    <>
       {error && <p>{error}</p>}
       {props.costArray.length > 0 && (
         <div className="main-page">
@@ -55,8 +43,8 @@ const MainContent = (props) => {
           </button>
         </div>
       )}
-    </Fragment>
+    </>
   );
 };
 
-export default MainContent;
+export default PostHandler;

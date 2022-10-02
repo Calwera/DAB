@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import MainContent from "./MainContent";
@@ -8,10 +8,15 @@ import SummaryModal from "./modals/SummaryModal";
 import SummaryDisplay from "./SummaryDisplay";
 import Navbar from "./Navbar";
 import useShow from "../hooks/use-show";
+import DeleteModal from "./modals/DeleteModal";
 
 const MainPage = () => {
   const [cost, setCost] = useState([]);
   const [summaryValue, setSummaryValue] = useState(null);
+
+  useEffect(() => {
+    setSummaryValue();
+  }, [cost]);
 
   const {
     show: addShown,
@@ -31,6 +36,12 @@ const MainPage = () => {
     hideHandler: hideDisplayHandler,
   } = useShow();
 
+  const {
+    show: deleteShown,
+    showHandler: showDeleteHandler,
+    hideHandler: hideDeleteHandler,
+  } = useShow();
+
   const addCost = (cost) => {
     setCost((prevCost) => {
       return [...prevCost, cost];
@@ -42,6 +53,7 @@ const MainPage = () => {
       const cost = prevCost.filter((ele) => {
         return ele.id !== id;
       });
+      console.log("dzialam", cost);
       return cost;
     });
   };
@@ -59,6 +71,7 @@ const MainPage = () => {
         const filteredArray = array.cost.filter(
           (cost) => cost.date >= array.dateFrom && cost.date <= array.dateTo
         );
+        // dodać parametr który rozpozna maincontent
         filteredArray.forEach((item) => addCost(item));
         return;
       }
@@ -88,6 +101,7 @@ const MainPage = () => {
             onAddShow={showAddHandler}
             onDisplayShow={showDisplayHandler}
             onSummaryShow={showSummaryHandler}
+            onDeleteShow={showDeleteHandler}
           />
           <div className="main-page__content-center">
             <Header />
@@ -101,6 +115,9 @@ const MainPage = () => {
             )}
             {cost.length === 0 && !summaryValue && (
               <p>Brak danych do wyświetlenia</p>
+            )}
+            {deleteShown && (
+              <DeleteModal closeDeleteModal={hideDeleteHandler} />
             )}
 
             {addShown && (

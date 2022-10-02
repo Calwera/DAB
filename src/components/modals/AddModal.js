@@ -73,7 +73,10 @@ const AddModal = (props) => {
           <button className="btn">Zapisz</button>
         </form>
       </div>
-      <div className="popup__overlay"></div>
+      <div
+        className="popup__overlay active"
+        onClick={props.closeAddModal}
+      ></div>
     </Fragment>
   );
 };

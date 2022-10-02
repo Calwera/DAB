@@ -1,20 +1,17 @@
 .popup {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) scale(0);
-  transition: 0.2s ease-in-out;
-  background-color: #fff;
-  border-radius: 10px;
-  z-index: 10;
-  width: 50rem;
-  max-width: 80%;
-  overflow: hidden;
+  animation: popupActive 0.5s ease-in-out;
   background-color: $color-primary-light;
+  border-radius: 10px;
+  top: 50%;
+  overflow: hidden;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  transition: 0.2s ease-in-out;
+  max-width: 80%;
+  position: fixed;
+  width: 50rem;
+  z-index: 10;
 
-  &.active {
-    transform: translate(-50%, -50%) scale(1);
-  }
   &__overlay {
     position: fixed;
     top: 0;

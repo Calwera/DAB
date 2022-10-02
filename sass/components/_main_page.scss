@@ -69,6 +69,7 @@
     max-height: 100vh;
     list-style: none;
 
+
     &-title {
       text-align: center;
       text-transform: uppercase;
@@ -88,6 +89,8 @@
       gap: 2rem;
       margin: 2rem;
       padding: 2rem;
+      z-index: 10;
+      cursor: pointer;
       &-income-name {
         display: flex;
         justify-content: space-around;
