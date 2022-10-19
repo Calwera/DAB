@@ -1,18 +1,17 @@
-import { doc, updateDoc, deleteField } from "firebase/firestore";
-import { db } from "../../firebase";
+import { ref, onValue } from "firebase/database";
+import { database } from "../../firebase";
 import React, { Fragment } from "react";
 
 const DeleteModal = (props) => {
-  const costRef = doc(db, "cost", "-NC1s804Bce6i52vqeQ0");
-  console.log(costRef);
-  const deleteHandler = async () => {
-    console.log("dzialam");
-    const mes = await updateDoc(costRef, {
-      category: deleteField(),
+  const deleteHandler = () => {
+    const data = ref(database, "cost/");
+    onValue(data, (snapshot) => {
+      const data2 = snapshot.val();
+      console.log(data2);
     });
-    console.log(mes);
     props.closeDeleteModal();
   };
+
   return (
     <Fragment>
       <div className="popup active" id="add">

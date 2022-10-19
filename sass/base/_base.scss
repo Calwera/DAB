@@ -42,5 +42,5 @@ body {
   opacity: 0.2;
   background-image: url(./../public/icons/dab_background.jpeg);
   background-size: cover;
-  z-index: -2;
+  pointer-events:none;
 }

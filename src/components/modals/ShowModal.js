@@ -1,4 +1,6 @@
 import React, { useRef, Fragment } from "react";
+import { ref, onValue } from "firebase/database";
+import { database } from "../../firebase";
 
 const ShowModal = (props) => {
   const category = useRef();
@@ -9,25 +11,22 @@ const ShowModal = (props) => {
     event.preventDefault();
 
     try {
-      const response = await fetch(
-        "https://domowa-aplikacja-budzetu-44d26-default-rtdb.europe-west1.firebasedatabase.app/cost.json"
-      );
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error("Cannot fetch data");
-      }
-
-      const array = Object.keys(data)
-        .map((key) => data[key])
-        .reduce((acc, val) => [...acc, ...val]);
-      const costArrayAndCondition = {
-        cost: array,
+      const data = ref(database, "cost/");
+      let costArrayAndCondition = {
         dateFrom: dateFrom.current.value,
         dateTo: dateTo.current.value,
         category: category.current.value,
       };
 
-      props.onDisplaySavedCost(costArrayAndCondition);
+      await onValue(data, (snapshot) => {
+        const data2 = snapshot.val();
+        const array = Object.keys(data2).map((key) => {
+          return { ...data2[key], id: key };
+        });
+        costArrayAndCondition.cost = array;
+        props.onDisplaySavedCost(costArrayAndCondition);
+      });
+
       props.closeDisplayModal();
     } catch (error) {
       console.log(error.message);

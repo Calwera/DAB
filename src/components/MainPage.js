@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import MainContent from "./MainContent";
@@ -9,6 +9,7 @@ import SummaryDisplay from "./SummaryDisplay";
 import Navbar from "./Navbar";
 import useShow from "../hooks/use-show";
 import DeleteModal from "./modals/DeleteModal";
+import Card from "./UI/Card";
 
 const MainPage = () => {
   const [cost, setCost] = useState([]);
@@ -53,7 +54,7 @@ const MainPage = () => {
       const cost = prevCost.filter((ele) => {
         return ele.id !== id;
       });
-      console.log("dzialam", cost);
+
       return cost;
     });
   };
@@ -94,52 +95,48 @@ const MainPage = () => {
   };
 
   return (
-    <Fragment>
-      <div className="background-image">
-        <section className="main-page">
-          <Navbar
-            onAddShow={showAddHandler}
-            onDisplayShow={showDisplayHandler}
-            onSummaryShow={showSummaryHandler}
-            onDeleteShow={showDeleteHandler}
-          />
-          <div className="main-page__content-center">
-            <Header />
-            {summaryValue && <SummaryDisplay summaryArray={summaryValue} />}
-            {cost.length > 0 && (
-              <MainContent
-                costArray={cost}
-                deleteCostArray={releaseCostArray}
-                filterCostArray={deleteCost}
-              />
-            )}
-            {cost.length === 0 && !summaryValue && (
-              <p>Brak danych do wyświetlenia</p>
-            )}
-            {deleteShown && (
-              <DeleteModal closeDeleteModal={hideDeleteHandler} />
-            )}
+    <Card>
+      <section className="main-page">
+        <Navbar
+          onAddShow={showAddHandler}
+          onDisplayShow={showDisplayHandler}
+          onSummaryShow={showSummaryHandler}
+          onDeleteShow={showDeleteHandler}
+        />
+        <div className="main-page__content-center">
+          <Header />
+          {summaryValue && <SummaryDisplay summaryArray={summaryValue} />}
+          {cost.length > 0 && (
+            <MainContent
+              costArray={cost}
+              deleteCostArray={releaseCostArray}
+              filterCostArray={deleteCost}
+            />
+          )}
+          {cost.length === 0 && !summaryValue && (
+            <p>Brak danych do wyświetlenia</p>
+          )}
+          {deleteShown && <DeleteModal closeDeleteModal={hideDeleteHandler} />}
 
-            {addShown && (
-              <AddModal closeAddModal={hideAddHandler} addCost={addCost} />
-            )}
-            {displayShown && (
-              <ShowModal
-                closeDisplayModal={hideDisplayHandler}
-                onDisplaySavedCost={displaySavedCost}
-              />
-            )}
-            {summaryShown && (
-              <SummaryModal
-                closeSummaryModal={hideSummaryHandler}
-                onSummaryShow={showSummary}
-              />
-            )}
-          </div>
-        </section>
-      </div>
+          {addShown && (
+            <AddModal closeAddModal={hideAddHandler} addCost={addCost} />
+          )}
+          {displayShown && (
+            <ShowModal
+              closeDisplayModal={hideDisplayHandler}
+              onDisplaySavedCost={displaySavedCost}
+            />
+          )}
+          {summaryShown && (
+            <SummaryModal
+              closeSummaryModal={hideSummaryHandler}
+              onSummaryShow={showSummary}
+            />
+          )}
+        </div>
+      </section>
       <Footer />
-    </Fragment>
+    </Card>
   );
 };
 

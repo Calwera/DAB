@@ -1,5 +1,7 @@
 import React, { Fragment, useState } from "react";
 import CostEntry from "./CostEntry";
+import { ref, set } from "firebase/database";
+import { database } from "../firebase";
 
 const MainContent = (props) => {
   const [error, setError] = useState(null);
@@ -10,22 +12,20 @@ const MainContent = (props) => {
 
   const confirmHandler = async () => {
     setError(null);
-    try {
-      const response = await fetch(
-        "https://domowa-aplikacja-budzetu-44d26-default-rtdb.europe-west1.firebasedatabase.app/cost.json",
-        {
-          method: "POST",
-          body: JSON.stringify(props.costArray),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
 
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error("Something went wrong");
-      }
+    const date = new Date();
+    const dateToInteger = date.toLocaleDateString().split(".").join("");
+    try {
+      await Promise.all(
+        props.costArray.map(async (cost, id) => {
+          set(ref(database, "cost/" + dateToInteger + id), {
+            category: cost.category,
+            date: cost.date,
+            price: cost.price,
+            description: cost.description,
+          });
+        })
+      );
 
       props.deleteCostArray();
     } catch (error) {
@@ -39,13 +39,19 @@ const MainContent = (props) => {
 
   return (
     <Fragment>
-      <ul className="main-page__content-center">
-        {props.costArray.map((item) => (
-          <CostEntry cost={item} key={item.id} deleteHandler={deleteItem} />
-        ))}
-      </ul>
+      <div className="main-page__content-center">
+        <ul>
+          {props.costArray.map((item) => (
+            <CostEntry
+              cost={item}
+              key={item.key || item.id}
+              deleteHandler={deleteItem}
+            />
+          ))}
+        </ul>
+      </div>
       {error && <p>{error}</p>}
-      {props.costArray.length > 0 && (
+      {props.costArray.length > 0 && props.costArray[0].id === undefined && (
         <div className="main-page">
           <button className="button-big confirm" onClick={confirmHandler}>
             Zapisz koszty w bazie

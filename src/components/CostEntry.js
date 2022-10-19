@@ -2,7 +2,6 @@ import React from "react";
 
 const CostEntry = (props) => {
   const clickHandler = () => {
-    console.log("dziala");
     props.deleteHandler(props.cost.id);
   };
   return (
