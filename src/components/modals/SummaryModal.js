@@ -1,4 +1,6 @@
 import React, { useRef, Fragment } from "react";
+import { ref, onValue } from "firebase/database";
+import { database } from "../../firebase";
 
 const SummaryModal = (props) => {
   const category = useRef();
@@ -9,45 +11,43 @@ const SummaryModal = (props) => {
     event.preventDefault();
 
     try {
-      const response = await fetch(
-        "https://domowa-aplikacja-budzetu-44d26-default-rtdb.europe-west1.firebasedatabase.app/cost.json"
-      );
-      const data = await response.json();
-      if (!response.ok) {
-        throw new Error("Cannot fetch data");
-      }
-
+      const data = ref(database, "cost/");
       const conditions = {
         category: category.current.value,
         dateFrom: dateFrom.current.value,
         dateTo: dateTo.current.value,
       };
 
-      const array = Object.keys(data)
-        .map((key) => data[key])
-        .reduce((acc, val) => [...acc, ...val]);
+      await onValue(data, (snapshot) => {
+        const dataSnapshot = snapshot.val();
+        const array = Object.keys(dataSnapshot).map((key) => {
+          return { ...dataSnapshot[key], id: key };
+        });
 
-      if (conditions.category === "Wszystko") {
-        const totalAmount = array
-          .filter(
-            (item) =>
-              item.date >= conditions.dateFrom && item.date <= conditions.dateTo
-          )
-          .reduce((prev, curr) => prev + +curr.price, 0);
-        const summary = { ...conditions, amount: totalAmount };
-        props.onSummaryShow(summary);
-      } else {
-        const totalAmount = array
-          .filter(
-            (item) =>
-              item.category === conditions.category &&
-              item.date >= conditions.dateFrom &&
-              item.date <= conditions.dateTo
-          )
-          .reduce((prev, curr) => prev + +curr.price, 0);
-        const summary = { ...conditions, amount: totalAmount };
-        props.onSummaryShow(summary);
-      }
+        if (conditions.category === "Wszystko") {
+          const totalAmount = array
+            .filter(
+              (item) =>
+                item.date >= conditions.dateFrom &&
+                item.date <= conditions.dateTo
+            )
+            .reduce((prev, curr) => prev + +curr.price, 0);
+          const summary = { ...conditions, amount: totalAmount };
+          props.onSummaryShow(summary);
+        } else {
+          const totalAmount = array
+            .filter(
+              (item) =>
+                item.category === conditions.category &&
+                item.date >= conditions.dateFrom &&
+                item.date <= conditions.dateTo
+            )
+            .reduce((prev, curr) => prev + +curr.price, 0);
+          const summary = { ...conditions, amount: totalAmount };
+          props.onSummaryShow(summary);
+        }
+      });
+
       props.closeSummaryModal();
     } catch (error) {
       console.log(error.message);

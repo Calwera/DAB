@@ -10,17 +10,17 @@ const Footer = () => {
       <div className="footer__link">
         <img
           src="./icons/email.svg"
-          alt="e-mail"
+          alt="e-mail logo link"
           className="footer__link-img"
         />
         <img
           src="./icons/github.svg"
-          alt="github"
+          alt="github logo link"
           className="footer__link-img"
         />
         <img
           src="./icons/linkedin.svg"
-          alt="linkedin"
+          alt="linkedin logo link"
           className="footer__link-img"
         />
       </div>

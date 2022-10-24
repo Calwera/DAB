@@ -1,12 +1,13 @@
 import React, { Fragment, useState } from "react";
 import CostEntry from "./CostEntry";
-import { ref, set } from "firebase/database";
+import { ref, remove, set } from "firebase/database";
 import { database } from "../firebase";
 
 const MainContent = (props) => {
   const [error, setError] = useState(null);
 
   const deleteItem = (id) => {
+    remove(ref(database, "cost/" + id));
     props.filterCostArray(id);
   };
 
@@ -14,7 +15,9 @@ const MainContent = (props) => {
     setError(null);
 
     const date = new Date();
-    const dateToInteger = date.toLocaleDateString().split(".").join("");
+    const dateToInteger =
+      date.toLocaleDateString().split(".").join("") + date.getUTCMilliseconds();
+
     try {
       await Promise.all(
         props.costArray.map(async (cost, id) => {
@@ -26,7 +29,7 @@ const MainContent = (props) => {
           });
         })
       );
-
+      alert("Dodano dane");
       props.deleteCostArray();
     } catch (error) {
       setError(error.message);
@@ -39,7 +42,7 @@ const MainContent = (props) => {
 
   return (
     <Fragment>
-      <div className="main-page__content-center">
+      <section className="main-page__content-center">
         <ul>
           {props.costArray.map((item) => (
             <CostEntry
@@ -49,7 +52,7 @@ const MainContent = (props) => {
             />
           ))}
         </ul>
-      </div>
+      </section>
       {error && <p>{error}</p>}
       {props.costArray.length > 0 && props.costArray[0].id === undefined && (
         <div className="main-page">
@@ -60,6 +63,11 @@ const MainContent = (props) => {
             Anuluj
           </button>
         </div>
+      )}
+      {props.costArray.length > 0 && props.costArray[0].id && (
+        <button className="button-big cancel" onClick={declineHandler}>
+          Wyjdz
+        </button>
       )}
     </Fragment>
   );

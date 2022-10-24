@@ -19,10 +19,11 @@ const ShowModal = (props) => {
       };
 
       await onValue(data, (snapshot) => {
-        const data2 = snapshot.val();
-        const array = Object.keys(data2).map((key) => {
-          return { ...data2[key], id: key };
+        const dataSnapshot = snapshot.val();
+        const array = Object.keys(dataSnapshot).map((key) => {
+          return { ...dataSnapshot[key], id: key };
         });
+
         costArrayAndCondition.cost = array;
         props.onDisplaySavedCost(costArrayAndCondition);
       });
