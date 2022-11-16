@@ -1,14 +1,28 @@
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useRef, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const AddModal = (props) => {
   const category = useRef();
   const price = useRef();
   const date = useRef();
   const description = useRef();
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.keyCode === 27) {
+        navigate("/");
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, []);
 
   const submitHandler = (event) => {
     event.preventDefault();
-
     const costEntry = {
       category: category.current.value,
       price: price.current.value,
@@ -18,7 +32,7 @@ const AddModal = (props) => {
     };
 
     props.addCost(costEntry);
-    props.closeAddModal();
+    navigate("/cost");
   };
 
   return (
@@ -26,9 +40,9 @@ const AddModal = (props) => {
       <div className="popup active" id="add">
         <div className="popup__header">
           <h2 className="popup__title">Dodaj koszt</h2>
-          <button className="popup__close-button" onClick={props.closeAddModal}>
-            &times;
-          </button>
+          <Link to="/">
+            <button className="popup__close-button">&times;</button>
+          </Link>
         </div>
         <form className="popup__form" onSubmit={submitHandler}>
           <div>
@@ -73,10 +87,9 @@ const AddModal = (props) => {
           <button className="btn">Zapisz</button>
         </form>
       </div>
-      <div
-        className="popup__overlay active"
-        onClick={props.closeAddModal}
-      ></div>
+      <Link to="/">
+        <div className="popup__overlay active"></div>
+      </Link>
     </Fragment>
   );
 };

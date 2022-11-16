@@ -1,11 +1,26 @@
-import React, { useRef, Fragment } from "react";
+import React, { useRef, Fragment, useEffect } from "react";
 import { ref, onValue } from "firebase/database";
 import { database } from "../../firebase";
+import { Link, useNavigate } from "react-router-dom";
 
 const SummaryModal = (props) => {
   const category = useRef();
   const dateFrom = useRef();
   const dateTo = useRef();
+  let navigate = useNavigate();
+
+  useEffect(() => {
+    const handleEsc = (event) => {
+      if (event.keyCode === 27) {
+        navigate("/");
+      }
+    };
+    window.addEventListener("keydown", handleEsc);
+
+    return () => {
+      window.removeEventListener("keydown", handleEsc);
+    };
+  }, []);
 
   const submitHandler = async (event) => {
     event.preventDefault();
@@ -47,8 +62,7 @@ const SummaryModal = (props) => {
           props.onSummaryShow(summary);
         }
       });
-
-      props.closeSummaryModal();
+      navigate("/summary");
     } catch (error) {
       console.log(error.message);
     }
@@ -59,12 +73,9 @@ const SummaryModal = (props) => {
       <div className="popup active">
         <div className="popup__header">
           <h2 className="popup__title">Podsumuj</h2>
-          <button
-            className="popup__close-button"
-            onClick={props.closeSummaryModal}
-          >
-            &times;
-          </button>
+          <Link to="/">
+            <button className="popup__close-button">&times;</button>
+          </Link>
         </div>
         <form className="popup__form" onSubmit={submitHandler}>
           <div>
@@ -91,10 +102,9 @@ const SummaryModal = (props) => {
           <button className="btn">Pokaż</button>
         </form>
       </div>
-      <div
-        className="popup__overlay active"
-        onClick={props.closeSummaryModal}
-      ></div>
+      <Link to="/">
+        <div className="popup__overlay active"></div>
+      </Link>
     </Fragment>
   );
 };

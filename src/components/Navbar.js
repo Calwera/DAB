@@ -1,7 +1,8 @@
 import React from "react";
 import { useAuth } from "../contexts/AuthContext";
+import { Link } from "react-router-dom";
 
-const Navbar = (props) => {
+const Navbar = () => {
   const { logout, currentUser } = useAuth();
   const logoutHandler = async () => {
     try {
@@ -15,20 +16,19 @@ const Navbar = (props) => {
     <nav className="main-page__nav">
       <div>{currentUser.email}</div>
       <ul className="main-page__nav-list">
-        <li className="main-page__nav-list-item">
-          <button
-            className="main-page__nav-list-link"
-            onClick={props.onAddShow}
-          >
-            <img
-              className="main-page__nav-icon"
-              src="icons/add.svg"
-              alt="add"
-            />
-            dodaj
-          </button>
-        </li>
-        <li className="main-page__nav-list-item">
+        <Link to="/addCost" className="main-page__nav-list-link">
+          <li className="main-page__nav-list-item">
+            <button>
+              <img
+                className="main-page__nav-icon"
+                src="icons/add.svg"
+                alt="add"
+              />
+              dodaj
+            </button>
+          </li>
+        </Link>
+        {/* <li className="main-page__nav-list-item">
           <button className="main-page__nav-list-link">
             <img
               className="main-page__nav-icon"
@@ -39,10 +39,7 @@ const Navbar = (props) => {
           </button>
         </li>
         <li className="main-page__nav-list-item">
-          <button
-            className="main-page__nav-list-link"
-            onClick={props.onDeleteShow}
-          >
+          <button className="main-page__nav-list-link">
             <img
               className="main-page__nav-icon"
               src="icons/remove.svg"
@@ -50,32 +47,30 @@ const Navbar = (props) => {
             />
             usuń
           </button>
+        </li> */}
+        <li className="main-page__nav-list-item">
+          <Link to="/displayCost" className="main-page__nav-list-link">
+            <button>
+              <img
+                className="main-page__nav-icon"
+                src="icons/show.svg"
+                alt="show"
+              />
+              wyświetl koszta
+            </button>
+          </Link>
         </li>
         <li className="main-page__nav-list-item">
-          <button
-            onClick={props.onDisplayShow}
-            className="main-page__nav-list-link"
-          >
-            <img
-              className="main-page__nav-icon"
-              src="icons/show.svg"
-              alt="show"
-            />
-            wyświetl koszta
-          </button>
-        </li>
-        <li className="main-page__nav-list-item">
-          <button
-            onClick={props.onSummaryShow}
-            className="main-page__nav-list-link"
-          >
-            <img
-              className="main-page__nav-icon"
-              src="icons/showall.svg"
-              alt="showall"
-            />
-            Podsumuj
-          </button>
+          <Link to="/summaryCheck" className="main-page__nav-list-link">
+            <button>
+              <img
+                className="main-page__nav-icon"
+                src="icons/showall.svg"
+                alt="showall"
+              />
+              Podsumuj
+            </button>
+          </Link>
         </li>
         <li className="main-page__nav-list-item">
           <button className="main-page__nav-list-link" onClick={logoutHandler}>

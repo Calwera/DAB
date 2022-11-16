@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Footer from "./Footer";
 import Header from "./Header";
 import MainContent from "./MainContent";
@@ -7,41 +7,12 @@ import ShowModal from "./modals/ShowModal";
 import SummaryModal from "./modals/SummaryModal";
 import SummaryDisplay from "./SummaryDisplay";
 import Navbar from "./Navbar";
-import useShow from "../hooks/use-show";
-import DeleteModal from "./modals/DeleteModal";
 import Card from "./UI/Card";
+import { Routes, Route } from "react-router-dom";
 
 const MainPage = () => {
   const [cost, setCost] = useState([]);
-  const [summaryValue, setSummaryValue] = useState(null);
-
-  useEffect(() => {
-    setSummaryValue();
-  }, [cost]);
-
-  const {
-    show: addShown,
-    showHandler: showAddHandler,
-    hideHandler: hideAddHandler,
-  } = useShow();
-
-  const {
-    show: summaryShown,
-    showHandler: showSummaryHandler,
-    hideHandler: hideSummaryHandler,
-  } = useShow();
-
-  const {
-    show: displayShown,
-    showHandler: showDisplayHandler,
-    hideHandler: hideDisplayHandler,
-  } = useShow();
-
-  const {
-    show: deleteShown,
-    showHandler: showDeleteHandler,
-    hideHandler: hideDeleteHandler,
-  } = useShow();
+  const [summaryValue, setSummaryValue] = useState("");
 
   const addCost = (cost) => {
     setCost((prevCost) => {
@@ -54,7 +25,6 @@ const MainPage = () => {
       const cost = prevCost.filter((ele) => {
         return ele.id !== id;
       });
-
       return cost;
     });
   };
@@ -72,7 +42,6 @@ const MainPage = () => {
         const filteredArray = array.cost.filter(
           (cost) => cost.date >= array.dateFrom && cost.date <= array.dateTo
         );
-        // dodać parametr który rozpozna maincontent
         filteredArray.forEach((item) => addCost(item));
         return;
       }
@@ -83,7 +52,6 @@ const MainPage = () => {
           cost.date >= array.dateFrom &&
           cost.date <= array.dateTo
       );
-
       filteredArray.forEach((item) => addCost(item));
     } else {
       array.cost.forEach((item) => addCost(item));
@@ -97,42 +65,48 @@ const MainPage = () => {
   return (
     <Card>
       <section className="main-page">
-        <Navbar
-          onAddShow={showAddHandler}
-          onDisplayShow={showDisplayHandler}
-          onSummaryShow={showSummaryHandler}
-          onDeleteShow={showDeleteHandler}
-        />
+        <Navbar />
         <div className="main-page__content-center">
           <Header />
-          {summaryValue && <SummaryDisplay summaryArray={summaryValue} />}
-          {cost.length > 0 && (
-            <MainContent
-              costArray={cost}
-              deleteCostArray={releaseCostArray}
-              filterCostArray={deleteCost}
-            />
-          )}
-          {cost.length === 0 && !summaryValue && (
-            <p>Brak danych do wyświetlenia</p>
-          )}
-          {deleteShown && <DeleteModal closeDeleteModal={hideDeleteHandler} />}
-
-          {addShown && (
-            <AddModal closeAddModal={hideAddHandler} addCost={addCost} />
-          )}
-          {displayShown && (
-            <ShowModal
-              closeDisplayModal={hideDisplayHandler}
-              onDisplaySavedCost={displaySavedCost}
-            />
-          )}
-          {summaryShown && (
-            <SummaryModal
-              closeSummaryModal={hideSummaryHandler}
-              onSummaryShow={showSummary}
-            />
-          )}
+          <Routes>
+            <Route
+              path="/summary"
+              element={
+                summaryValue && <SummaryDisplay summaryArray={summaryValue} />
+              }
+            ></Route>
+            <Route
+              path="/cost"
+              element={
+                cost.length > 0 && (
+                  <MainContent
+                    costArray={cost}
+                    deleteCostArray={releaseCostArray}
+                    filterCostArray={deleteCost}
+                  />
+                )
+              }
+            ></Route>
+            <Route
+              path="/"
+              element={
+                cost.length === 0 &&
+                !summaryValue && <p>Brak danych do wyświetlenia</p>
+              }
+            ></Route>
+            <Route
+              path="/addCost"
+              element={<AddModal addCost={addCost} />}
+            ></Route>
+            <Route
+              path="/displayCost"
+              element={<ShowModal onDisplaySavedCost={displaySavedCost} />}
+            ></Route>
+            <Route
+              path="/summaryCheck"
+              element={<SummaryModal onSummaryShow={showSummary} />}
+            ></Route>
+          </Routes>
         </div>
       </section>
       <Footer />

@@ -4,18 +4,24 @@
   &.disable {
     pointer-events: none;
   }
+
   &__nav {
+    position: relative;
     align-items: center;
     background-color: $color-primary-light;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    height: 100vh;
+    min-height: 100vh;
 
     &-list {
       list-style: none;
       margin-top: 3.5rem;
       
+      &-link:active, &-link:hover ,&-link:visited, &-link:link {
+        text-decoration: none;
+      }
+
       &-item {
         position: relative;
         
@@ -66,9 +72,8 @@
   &__content-center {
     background-color: $color-background;
     flex: 4;
-    max-height: 100vh;
+    min-height: 100vh;
     list-style: none;
-
 
     &-title {
       text-align: center;

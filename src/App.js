@@ -11,7 +11,7 @@ function App() {
     <AuthProvider>
       <Routes>
         <Route
-          path="/"
+          path="*"
           element={
             <PrivateRoute>
               <MainPage />

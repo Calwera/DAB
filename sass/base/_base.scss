@@ -26,7 +26,7 @@ body {
 
 .background-image {
 
-  height: 100vh;
+  min-height: 100vh;
   position: relative;
 
 }
@@ -41,6 +41,7 @@ body {
   height: 100%;
   opacity: 0.2;
   background-image: url(./../public/icons/dab_background.jpeg);
-  background-size: cover;
+  // background-size: cover;
   pointer-events:none;
+  background-repeat: repeat;
 }
