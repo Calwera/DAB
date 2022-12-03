@@ -1,0 +1,22 @@
+.alert {
+  background-color: $color-primary-light;
+  border-radius: 10px;
+  overflow: hidden;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  width: 40rem;
+  z-index: 10;
+
+  &__header {
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: $color-primary-dark;
+  }
+
+  button {
+  }
+}

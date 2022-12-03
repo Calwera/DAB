@@ -1,29 +1,26 @@
 .summary {
-    margin: 2rem 1rem;
-    padding: 0 0.5rem;
-    
-    border: 2px solid $color-primary-dark;
-    border-radius: 10px;
-    text-align: center;
-    background-color: $color-primary-light;
-    
-    &__label {
-        display: grid;
-        font-size: 2rem;
-        grid-template-columns: repeat(4, 1fr);
-        margin: 1rem auto;
-        padding: 1rem 0.5rem;
-        border-bottom: 2px solid $color-primary-dark;
-       
-    }
+  margin: 2rem 1rem;
+  padding: 0 0.5rem;
 
-    &__values {
-        display: grid;
-        font-size: 2rem;
-        grid-template-columns: repeat(4, 1fr);
-        margin: 1rem auto;
-        padding: 1rem 0.5rem;
-        
-        
-    }
+  border: 2px solid $color-primary-dark;
+  border-radius: 10px;
+  text-align: center;
+  background-color: $color-primary-light;
+
+  &__label {
+    display: grid;
+    font-size: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 1rem auto;
+    padding: 1rem 0.5rem;
+    border-bottom: 2px solid $color-primary-dark;
+  }
+
+  &__values {
+    display: grid;
+    font-size: 2rem;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 1rem auto;
+    padding: 1rem 0.5rem;
+  }
 }

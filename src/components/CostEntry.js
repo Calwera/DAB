@@ -4,6 +4,7 @@ const CostEntry = (props) => {
   const clickHandler = () => {
     props.deleteHandler(props.cost.id);
   };
+
   return (
     <li className="main-page__content-center-stats" onClick={clickHandler}>
       <div>{props.cost.category}</div>

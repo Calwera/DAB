@@ -2,11 +2,31 @@ import React, { Fragment, useState } from "react";
 import CostEntry from "./CostEntry";
 import { ref, remove, set } from "firebase/database";
 import { database } from "../firebase";
+import Alert from "./UI/Alert";
 
 const MainContent = (props) => {
   const [error, setError] = useState(null);
+  const [alert, setAlert] = useState({
+    message: "",
+    isLoading: false,
+    id: null,
+  });
 
   const deleteItem = (id) => {
+    setAlert({
+      message: "Jesteś pewny ze chcesz usunąć?",
+      isLoading: true,
+      id,
+    });
+  };
+
+  const confirmDelete = (id) => {
+    setAlert({
+      message: "",
+      isLoading: false,
+      id: null,
+    });
+    if (id === null) return;
     remove(ref(database, "cost/" + id));
     props.filterCostArray(id);
   };
@@ -68,6 +88,13 @@ const MainContent = (props) => {
         <button className="button-big cancel" onClick={declineHandler}>
           Wyjdz
         </button>
+      )}
+      {alert.isLoading && (
+        <Alert
+          onDeleteHandler={confirmDelete}
+          message={alert.message}
+          id={alert.id}
+        />
       )}
     </Fragment>
   );
