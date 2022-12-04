@@ -49,8 +49,11 @@ const MainContent = (props) => {
           });
         })
       );
-      addConfirm();
-      // props.deleteCostArray();
+      setAlert({
+        message: "Dodano Koszta",
+        isLoading: true,
+        id: 1,
+      });
     } catch (error) {
       setError(error.message);
     }
@@ -58,9 +61,9 @@ const MainContent = (props) => {
 
   const addConfirm = () => {
     setAlert({
-      message: "Jdodano?",
-      isLoading: true,
-      id: 1,
+      message: "",
+      isLoading: false,
+      id: null,
     });
     props.deleteCostArray();
   };
@@ -106,6 +109,7 @@ const MainContent = (props) => {
       )}
       {alert.isLoading && (
         <Alert
+          onAddCost={addConfirm}
           onDeleteHandler={confirmDelete}
           message={alert.message}
           id={alert.id}

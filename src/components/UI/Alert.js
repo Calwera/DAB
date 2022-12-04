@@ -1,7 +1,6 @@
 import React, { Fragment, useEffect } from "react";
 
 const Alert = (props) => {
-  console.log(props.message);
   useEffect(() => {
     const handleEsc = (event) => {
       if (event.keyCode === 27) {
@@ -20,7 +19,7 @@ const Alert = (props) => {
       <div className="alert">
         <h2 className="alert__header">{props.message}</h2>
         <div className="alert__container">
-          {props.id !== null && (
+          {props.id !== 1 && (
             <button
               className="alert__confirm"
               onClick={() => props.onDeleteHandler(props.id)}
@@ -28,7 +27,7 @@ const Alert = (props) => {
               Tak
             </button>
           )}
-          {props.id !== null && (
+          {props.id !== 1 && (
             <button
               className="alert__cancel"
               onClick={() => props.onDeleteHandler(null)}
@@ -39,7 +38,7 @@ const Alert = (props) => {
           {props.id === 1 && (
             <button
               className="alert__confirm"
-              onClick={() => props.onDeleteHandler(null)}
+              onClick={() => props.onAddCost(null)}
             >
               Ok
             </button>
