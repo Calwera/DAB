@@ -1,22 +1,45 @@
 .alert {
   background-color: $color-primary-light;
   border-radius: 10px;
+  height: 15rem;
   overflow: hidden;
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
   left: 50%;
-  width: 40rem;
+  width: 30rem;
   z-index: 10;
+
+  &__container {
+    align-items: center;
+    display: flex;
+    justify-content: space-around;
+    min-height: 80%;
+  }
 
   &__header {
     padding: 1rem 1.5rem;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
     background-color: $color-primary-dark;
   }
 
+  &__confirm {
+    background-color: $color-text-green;
+  }
+
+  &__cancel {
+    background-color: $color-text-red;
+  }
+
   button {
+    border: none;
+    border-radius: 10px;
+    color: $color-white;
+    cursor: pointer;
+    margin: 2rem 1rem;
+    padding: 1rem 3rem;
+    text-transform: uppercase;
   }
 }
