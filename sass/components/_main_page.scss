@@ -5,6 +5,16 @@
     pointer-events: none;
   }
 
+  &__header {
+    align-items: center;
+    display: flex;
+    justify-content: space-b;
+
+    div {
+      background-color: $color-primary-dark;
+    }
+  }
+
   &__nav {
     position: relative;
     align-items: center;

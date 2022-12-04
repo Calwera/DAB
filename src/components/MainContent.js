@@ -49,11 +49,20 @@ const MainContent = (props) => {
           });
         })
       );
-      alert("Dodano dane");
-      props.deleteCostArray();
+      addConfirm();
+      // props.deleteCostArray();
     } catch (error) {
       setError(error.message);
     }
+  };
+
+  const addConfirm = () => {
+    setAlert({
+      message: "Jdodano?",
+      isLoading: true,
+      id: 1,
+    });
+    props.deleteCostArray();
   };
 
   const declineHandler = () => {
@@ -63,6 +72,12 @@ const MainContent = (props) => {
   return (
     <Fragment>
       <section className="main-page__content-center">
+        <h2 className="main-page__header">
+          <div>Kwota</div>
+          <div>Kategoria</div>
+          <div>Data</div>
+          <div>opis</div>
+        </h2>
         <ul>
           {props.costArray.map((item) => (
             <CostEntry
