@@ -41,11 +41,13 @@ const MainContent = (props) => {
     try {
       await Promise.all(
         props.costArray.map(async (cost, id) => {
+          console.log(cost.user);
           set(ref(database, "cost/" + dateToInteger + id), {
             category: cost.category,
             date: cost.date,
             price: cost.price,
             description: cost.description,
+            user: cost.user,
           });
         })
       );
@@ -80,6 +82,7 @@ const MainContent = (props) => {
           <div>Kategoria</div>
           <div>Data</div>
           <div>opis</div>
+          <div>użytkownik</div>
         </h2>
         <ul>
           {props.costArray.map((item) => (

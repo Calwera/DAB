@@ -8,10 +8,12 @@
   &__header {
     align-items: center;
     display: flex;
-    justify-content: space-b;
+    justify-content: space-between;
+    margin: 2rem;
 
     div {
-      background-color: $color-primary-dark;
+      font-size: 2rem;
+      text-transform: uppercase;
     }
   }
 

@@ -1,12 +1,16 @@
 import React, { Fragment, useRef, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 const AddModal = (props) => {
+  const { currentUser } = useAuth();
   const category = useRef();
   const price = useRef();
   const date = useRef();
   const description = useRef();
   let navigate = useNavigate();
+
+  const todayDate = new Date().toISOString().split("T")[0];
 
   useEffect(() => {
     const handleEsc = (event) => {
@@ -29,6 +33,7 @@ const AddModal = (props) => {
       date: date.current.value,
       description: description.current.value,
       key: Math.random().toString(),
+      user: currentUser.email,
     };
 
     props.addCost(costEntry);
@@ -72,7 +77,7 @@ const AddModal = (props) => {
           <div>
             <label>
               Wprowadź date
-              <input type="date" ref={date} />
+              <input type="date" ref={date} defaultValue={todayDate} />
             </label>
           </div>
           <div>
