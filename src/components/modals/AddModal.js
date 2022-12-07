@@ -1,6 +1,9 @@
-import React, { Fragment, useRef, useEffect } from "react";
+import React, { Fragment, useRef, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+
+const isEmpty = (value) => value.trim() === "";
+const isPositive = (value) => value > 0;
 
 const AddModal = (props) => {
   const { currentUser } = useAuth();
@@ -9,6 +12,10 @@ const AddModal = (props) => {
   const date = useRef();
   const description = useRef();
   let navigate = useNavigate();
+  const [formInputValidity, setFormValidity] = useState({
+    category: true,
+    price: true,
+  });
 
   const todayDate = new Date().toISOString().split("T")[0];
 
@@ -27,9 +34,26 @@ const AddModal = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
+
+    const enteredPrice = price.current.value;
+    const enteredCategory = category.current.value;
+    const categoryIsValid = !isEmpty(enteredCategory);
+    const priceIsValid = !isEmpty(enteredPrice) && isPositive(enteredPrice);
+
+    setFormValidity({
+      category: categoryIsValid,
+      price: priceIsValid,
+    });
+
+    const formIsValid = categoryIsValid && priceIsValid;
+
+    if (!formIsValid) {
+      return;
+    }
+
     const costEntry = {
-      category: category.current.value,
-      price: price.current.value,
+      category: enteredCategory,
+      price: enteredPrice,
       date: date.current.value,
       description: description.current.value,
       key: Math.random().toString(),
@@ -39,6 +63,14 @@ const AddModal = (props) => {
     props.addCost(costEntry);
     navigate("/cost");
   };
+
+  const costValid = formInputValidity.cost
+    ? "invalid"
+    : "general--form__log-input";
+
+  const categoryValid = formInputValidity.category
+    ? "popup__form-select"
+    : "invalid";
 
   return (
     <Fragment>
@@ -51,7 +83,7 @@ const AddModal = (props) => {
         </div>
         <form className="popup__form" onSubmit={submitHandler}>
           <div>
-            <label htmlFor="category" className="popup__form-select">
+            <label htmlFor="category" className={categoryValid}>
               Kategoria kosztów
             </label>
             <select id="category" ref={category}>
@@ -62,16 +94,17 @@ const AddModal = (props) => {
               <option value="Raty">Raty</option>
               <option value="Inne">Inne</option>
             </select>
+            {!formInputValidity.category && <p>Wybierz jakąś kategorie</p>}
           </div>
           <div>
             <label htmlFor="value">Kwota</label>
+            {!formInputValidity.price && <p>Podaj poprawną kwotę.</p>}
             <input
               type="number"
               step="0.01"
               id="value"
               placeholder="0"
               ref={price}
-              required
             />
           </div>
           <div>
