@@ -64,13 +64,13 @@ const AddModal = (props) => {
     navigate("/cost");
   };
 
-  const costValid = formInputValidity.cost
-    ? "invalid"
-    : "general--form__log-input";
+  const costValid = formInputValidity.price
+    ? "popup__form-select"
+    : "popup__invalid";
 
   const categoryValid = formInputValidity.category
     ? "popup__form-select"
-    : "invalid";
+    : "popup__invalid";
 
   return (
     <Fragment>
@@ -83,6 +83,9 @@ const AddModal = (props) => {
         </div>
         <form className="popup__form" onSubmit={submitHandler}>
           <div>
+            {!formInputValidity.category && (
+              <p className="popup__warning">Wybierz jakąś kategorie</p>
+            )}
             <label htmlFor="category" className={categoryValid}>
               Kategoria kosztów
             </label>
@@ -94,11 +97,14 @@ const AddModal = (props) => {
               <option value="Raty">Raty</option>
               <option value="Inne">Inne</option>
             </select>
-            {!formInputValidity.category && <p>Wybierz jakąś kategorie</p>}
           </div>
           <div>
-            <label htmlFor="value">Kwota</label>
-            {!formInputValidity.price && <p>Podaj poprawną kwotę.</p>}
+            {!formInputValidity.price && (
+              <p className="popup__warning">Podaj poprawną kwotę</p>
+            )}
+            <label htmlFor="value" className={costValid}>
+              Kwota
+            </label>
             <input
               type="number"
               step="0.01"
