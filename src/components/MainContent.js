@@ -3,6 +3,7 @@ import CostEntry from "./CostEntry";
 import { ref, remove, set } from "firebase/database";
 import { database } from "../firebase";
 import Alert from "./UI/Alert";
+import { useNavigate } from "react-router-dom";
 
 const MainContent = (props) => {
   const [error, setError] = useState(null);
@@ -11,6 +12,7 @@ const MainContent = (props) => {
     isLoading: false,
     id: null,
   });
+  let navigate = useNavigate();
 
   const deleteItem = (id) => {
     setAlert({
@@ -68,10 +70,12 @@ const MainContent = (props) => {
       id: null,
     });
     props.deleteCostArray();
+    navigate("/");
   };
 
   const declineHandler = () => {
     props.deleteCostArray();
+    navigate("/");
   };
 
   return (

@@ -9,6 +9,7 @@ import SummaryDisplay from "./SummaryDisplay";
 import Navbar from "./Navbar";
 import Card from "./UI/Card";
 import { Routes, Route } from "react-router-dom";
+import CostSummary from "./CostSummary";
 
 const MainPage = () => {
   const [cost, setCost] = useState([]);
@@ -89,10 +90,7 @@ const MainPage = () => {
             ></Route>
             <Route
               path="/"
-              element={
-                cost.length === 0 &&
-                !summaryValue && <p>Brak danych do wyświetlenia</p>
-              }
+              element={cost.length === 0 && !summaryValue && <CostSummary />}
             ></Route>
             <Route
               path="/addCost"
