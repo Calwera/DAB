@@ -1,0 +1,21 @@
+.counter {
+  align-items: center;
+  background-color: $color-primary-light;
+  border-radius: 50%;
+  flex-direction: column;
+  justify-content: center;
+  display: flex;
+  height: 15rem;
+  margin: 3rem;
+  padding: 2rem;
+  width: 15rem;
+
+  &__title {
+    color: $color-white;
+  }
+
+  &__value {
+    color: $color-text-red;
+    font-size: 3rem;
+  }
+}

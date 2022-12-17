@@ -30,11 +30,10 @@ const CostSummary = () => {
   }, []);
 
   return (
-    <section>
-      <h3>Wydatki</h3>
-      <div>{cost}</div>
-      <div>Za miesiąc</div>
-      <div>{month}</div>
+    <section className="counter">
+      <h3 className="counter__title">Wydatki</h3>
+      <div className="counter__value">{cost}</div>
+      <div className="counter__title">{month}</div>
     </section>
   );
 };
