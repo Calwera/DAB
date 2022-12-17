@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Routes, Route } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import MainContent from "./MainContent";
@@ -8,7 +9,6 @@ import SummaryModal from "./modals/SummaryModal";
 import SummaryDisplay from "./SummaryDisplay";
 import Navbar from "./Navbar";
 import Card from "./UI/Card";
-import { Routes, Route } from "react-router-dom";
 import CostSummary from "./CostSummary";
 
 const MainPage = () => {
@@ -62,6 +62,9 @@ const MainPage = () => {
   const showSummary = (sum) => {
     setSummaryValue(sum);
   };
+  const releaseSummary = () => {
+    setSummaryValue("");
+  };
 
   return (
     <Card>
@@ -73,7 +76,12 @@ const MainPage = () => {
             <Route
               path="/summary"
               element={
-                summaryValue && <SummaryDisplay summaryArray={summaryValue} />
+                summaryValue && (
+                  <SummaryDisplay
+                    summaryArray={summaryValue}
+                    deleteSummary={releaseSummary}
+                  />
+                )
               }
             ></Route>
             <Route

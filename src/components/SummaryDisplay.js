@@ -1,8 +1,14 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 const SummaryDisplay = (props) => {
   const { dateTo, dateFrom, category, amount } = props.summaryArray;
+  const navigate = useNavigate();
 
+  const quitHandler = () => {
+    props.deleteSummary();
+    navigate("/");
+  };
   return (
     <section className="summary">
       <div className="summary__label">
@@ -17,6 +23,9 @@ const SummaryDisplay = (props) => {
         <div>{dateTo}</div>
         <div>{category}</div>
       </div>
+      <button className="button-big confirm" onClick={quitHandler}>
+        Wyjdz
+      </button>
     </section>
   );
 };
