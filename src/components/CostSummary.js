@@ -3,9 +3,11 @@ import { ref, onValue } from "firebase/database";
 import { database } from "../firebase";
 
 const CostSummary = () => {
-  const [cost, setCost] = useState("");
   const date = new Date();
-  const month = date.getFullYear() + "-" + (+date.getMonth() + 1) + "-" + "01";
+  const month = date.toLocaleString("default", { month: "long" });
+
+  const [cost, setCost] = useState("");
+  const today = date.getFullYear() + "-" + (+date.getMonth() + 1) + "-" + "01";
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -18,7 +20,7 @@ const CostSummary = () => {
           });
 
           const totalAmount = array
-            .filter((item) => item.date >= month)
+            .filter((item) => item.date >= today)
             .reduce((prev, curr) => prev + +curr.price, 0);
           setCost(totalAmount);
         });
