@@ -64,14 +64,6 @@ const AddModal = (props) => {
     navigate("/cost");
   };
 
-  const costValid = formInputValidity.price
-    ? "popup__form-select"
-    : "popup__invalid";
-
-  const categoryValid = formInputValidity.category
-    ? "popup__form-select"
-    : "popup__invalid";
-
   return (
     <Fragment>
       <div className="popup active" id="add">
@@ -82,52 +74,38 @@ const AddModal = (props) => {
           </Link>
         </div>
         <form className="popup__form" onSubmit={submitHandler}>
-          <div>
-            {!formInputValidity.category && (
-              <p className="popup__warning">Wybierz jakąś kategorie</p>
-            )}
-            <label htmlFor="category" className={categoryValid}>
-              Kategoria kosztów
-            </label>
-            <select id="category" ref={category}>
-              <option value="">Kategorie</option>
-              <option value="Jedzenie">Jedzenie</option>
-              <option value="Rachunki">Rachunki</option>
-              <option value="Zakupy">Zakupy</option>
-              <option value="Raty">Raty</option>
-              <option value="Inne">Inne</option>
-            </select>
-          </div>
-          <div>
-            {!formInputValidity.price && (
-              <p className="popup__warning">Podaj poprawną kwotę</p>
-            )}
-            <label htmlFor="value" className={costValid}>
-              Kwota
-            </label>
-            <input
-              type="number"
-              step="0.01"
-              id="value"
-              placeholder="0"
-              ref={price}
-            />
-          </div>
-          <div>
-            <label>
-              Wprowadź date
-              <input type="date" ref={date} defaultValue={todayDate} />
-            </label>
-          </div>
-          <div>
-            <label htmlFor="opis">Opis</label>
-            <input
-              type="text"
-              id="opis"
-              placeholder="zakupy"
-              ref={description}
-            />
-          </div>
+          <label htmlFor="category" className="popup__form-select">
+            Kategoria kosztów
+          </label>
+          <select id="category" ref={category}>
+            <option value="">Kategorie</option>
+            <option value="Jedzenie">Jedzenie</option>
+            <option value="Rachunki">Rachunki</option>
+            <option value="Zakupy">Zakupy</option>
+            <option value="Raty">Raty</option>
+            <option value="Inne">Inne</option>
+          </select>
+          {!formInputValidity.category && (
+            <span className="popup__warning">Wybierz jakąś kategorie</span>
+          )}
+
+          <label htmlFor="value" className="popup__form-select">
+            Kwota
+          </label>
+          <input
+            type="number"
+            step="0.01"
+            id="value"
+            placeholder="0"
+            ref={price}
+          />
+          {!formInputValidity.price && (
+            <span className="popup__warning">Podaj poprawną kwotę</span>
+          )}
+          <label>Wprowadź date</label>
+          <input type="date" ref={date} defaultValue={todayDate} />
+          <label htmlFor="opis">Opis</label>
+          <input type="text" id="opis" placeholder="zakupy" ref={description} />
           <button className="btn">Zapisz</button>
         </form>
       </div>

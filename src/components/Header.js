@@ -2,9 +2,9 @@ import React from "react";
 
 const Header = () => {
   return (
-    <h2 className="main-page__content-center-title">
+    <h1 className="main-page__content-center-title">
       Domowa aplikacja budzetu
-    </h2>
+    </h1>
   );
 };
 

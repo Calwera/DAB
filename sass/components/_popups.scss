@@ -9,10 +9,10 @@
   transition: 0.2s ease-in-out;
   max-width: 80%;
   position: fixed;
-  width: 50rem;
+
   z-index: 10;
 
-  &__invalid{
+  &__invalid {
     background-color: $color-text-red;
     border: none;
     border-radius: 10px;
@@ -24,11 +24,10 @@
   }
 
   &__warning {
-    
     color: $color-text-red;
     font-size: 0.8rem;
-    margin: 0.2rem;
-    text-align: right;
+    margin-top: -1rem;
+    margin-left: 1rem;
   }
 
   &__overlay {
@@ -71,13 +70,11 @@
   }
 
   &__form {
-    font-size: 2rem;
     display: flex;
     flex-direction: column;
-    align-items: flex-end;
     margin: 2rem;
     text-transform: uppercase;
-    gap: 2rem;
+    gap: 1rem;
     margin-right: 4rem;
 
     input {
@@ -98,23 +95,22 @@
       width: 20rem;
     }
 
-    // label {
-    //   margin-left: 1rem;
-    // }
+    label {
+      margin-left: 1rem;
+    }
 
     .btn {
-      padding: 1rem 3rem;
-      margin-top: 4rem;
-      border-radius: 20px;
-      text-decoration: none;
-      color: #fff;
-      background-color: $color-primary-dark;
-      font-size: 2rem;
       align-self: center;
+      background-color: $color-primary-dark;
       border: none;
-      cursor: pointer;
-      transition: all 0.2s;
+      border-radius: 20px;
       box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.2);
+      color: #fff;
+      cursor: pointer;
+      font-size: 2rem;
+      padding: 1rem 3rem;
+      text-decoration: none;
+      transition: all 0.2s;
 
       &:hover {
         transform: translateY(-3px);

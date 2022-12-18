@@ -6,7 +6,7 @@ const LoginScreen = () => {
   return (
     <Card>
       <div className="general">
-        <h2 className="general--title">DOMOWA APLIKACJA BUDŻETU</h2>
+        <h1 className="general--title">DOMOWA APLIKACJA BUDŻETU</h1>
         <div className="general--board">
           <img
             src="/icons/dab_main.svg"

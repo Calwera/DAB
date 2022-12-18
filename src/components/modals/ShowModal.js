@@ -72,13 +72,13 @@ const ShowModal = (props) => {
               <option value="Wszystko">wszystko</option>
             </select>
           </div>
-          <div>
-            <label>
-              Wprowadź zakres dat
-              <input type="date" ref={dateFrom} required />
-              <input type="date" ref={dateTo} required />
-            </label>
-          </div>
+          <label>Wprowadź zakres dat</label>
+          <label>
+            OD <input type="date" ref={dateFrom} required />
+          </label>
+          <label>
+            Do <input type="date" ref={dateTo} required />
+          </label>
           <button className="btn">Pokaż</button>
         </form>
       </div>
