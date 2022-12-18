@@ -54,7 +54,7 @@ const MainContent = (props) => {
         })
       );
       setAlert({
-        message: "Dodano Koszta",
+        message: "Dodano Wydatek",
         isLoading: true,
         id: 1,
       });
@@ -102,7 +102,7 @@ const MainContent = (props) => {
       {props.costArray.length > 0 && props.costArray[0].id === undefined && (
         <div className="main-page">
           <button className="button-big confirm" onClick={confirmHandler}>
-            Zapisz koszty w bazie
+            Zapisz wydatki w bazie
           </button>
           <button className="button-big cancel" onClick={declineHandler}>
             Anuluj

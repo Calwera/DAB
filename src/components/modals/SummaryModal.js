@@ -80,7 +80,7 @@ const SummaryModal = (props) => {
         <form className="popup__form" onSubmit={submitHandler}>
           <div>
             <label htmlFor="category" className="popup__form-select">
-              Kategoria kosztów
+              Kategoria wydatków
             </label>
             <select id="category" ref={category}>
               <option value="">Kategorie</option>

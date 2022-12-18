@@ -68,14 +68,14 @@ const AddModal = (props) => {
     <Fragment>
       <div className="popup active" id="add">
         <div className="popup__header">
-          <h2 className="popup__title">Dodaj koszt</h2>
+          <h2 className="popup__title">Dodaj Wydatek</h2>
           <Link to="/">
             <button className="popup__close-button">&times;</button>
           </Link>
         </div>
         <form className="popup__form" onSubmit={submitHandler}>
           <label htmlFor="category" className="popup__form-select">
-            Kategoria kosztów
+            Kategoria wydatków
           </label>
           <select id="category" ref={category}>
             <option value="">Kategorie</option>
