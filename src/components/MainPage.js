@@ -10,6 +10,8 @@ import SummaryDisplay from "./SummaryDisplay";
 import Navbar from "./Navbar";
 import Card from "./UI/Card";
 import CostSummary from "./CostSummary";
+import Charts from "./Charts";
+import CharPie from "./CharPie";
 
 const MainPage = () => {
   const [cost, setCost] = useState([]);
@@ -112,6 +114,8 @@ const MainPage = () => {
               path="/summaryCheck"
               element={<SummaryModal onSummaryShow={showSummary} />}
             ></Route>
+            <Route path="/Chart" element={<Charts />}></Route>
+            <Route path="/ChartPie" element={<CharPie />}></Route>
           </Routes>
         </div>
       </section>

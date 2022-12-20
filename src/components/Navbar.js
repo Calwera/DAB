@@ -14,7 +14,7 @@ const Navbar = () => {
   // TO DO STYLE USER
   return (
     <nav className="main-page__nav">
-      <div>{currentUser.email}</div>
+      <div className="main-page__user">{currentUser.email}</div>
       <ul className="main-page__nav-list">
         <Link to="/addCost" className="main-page__nav-list-link">
           <li className="main-page__nav-list-item">
@@ -73,11 +73,24 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="main-page__nav-list-item">
+          <Link to="/Chart" className="main-page__nav-list-link">
+            <button>
+              <img
+                className="main-page__nav-icon"
+                src="icons/showall.svg"
+                alt="showall"
+              />
+              Wykres
+            </button>
+          </Link>
+        </li>
+        <li className="main-page__nav-list-item">
           <button className="main-page__nav-list-link" onClick={logoutHandler}>
             Wyloguj
           </button>
         </li>
       </ul>
+
       <img
         src="/icons/dab_main.svg"
         alt="App Logo"
