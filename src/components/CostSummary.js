@@ -1,15 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import { ref, onValue } from "firebase/database";
 import { database } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import { useCost } from "../contexts/CostContext";
 
 const CostSummary = () => {
   const navigate = useNavigate();
   const date = new Date();
   const month = date.toLocaleString("default", { month: "long" });
-
+  const ctx = useCost();
   const [cost, setCost] = useState("");
-  const [arrToSort, setArrToSort] = useState("");
 
   const today = date.getFullYear() + "-" + (+date.getMonth() + 1) + "-" + "01";
   useEffect(() => {
@@ -23,7 +23,7 @@ const CostSummary = () => {
             return { ...dataSnapshot[key], id: key };
           });
 
-          setArrToSort(array.filter((item) => item.date >= today));
+          ctx.setCost(array.filter((item) => item.date >= today));
 
           const totalAmount = array
             .filter((item) => item.date >= today)
