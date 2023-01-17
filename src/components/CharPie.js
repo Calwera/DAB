@@ -5,6 +5,9 @@ import { Pie } from "react-chartjs-2";
 const CharPie = (props) => {
   const ctx = useCost();
 
+  // console.log(ctx.cost);
+  // const costSum = ctx.cost.
+
   const [chartData, setChartData] = useState({
     labels: ctx.cost.map((data) => data.category),
     datasets: [

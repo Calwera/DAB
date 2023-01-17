@@ -11,7 +11,16 @@ const CostSummary = () => {
   const ctx = useCost();
   const [cost, setCost] = useState("");
 
-  const today = date.getFullYear() + "-" + (+date.getMonth() + 1) + "-" + "01";
+  const today =
+    date.getFullYear() +
+    "-" +
+    (+date.getMonth() + 1).toLocaleString("en-US", {
+      minimumIntegerDigits: 2,
+      useGrouping: false,
+    }) +
+    "-" +
+    "01";
+
   useEffect(() => {
     const fetchData = async () => {
       try {
