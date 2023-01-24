@@ -4,60 +4,28 @@ import { Pie } from "react-chartjs-2";
 
 const CharPie = () => {
   const ctx = useCost();
-  console.log();
-  let costSummary = [];
-  costSummary.push({
-    category: "Jedzenie",
-    price: ctx.cost
-      .filter((obj) => {
-        if (!obj.category.localeCompare("Jedzenie")) return obj.price;
-      })
-      .reduce((total, obj) => {
-        return +obj.price + total;
-      }, 0),
-  });
-  costSummary.push({
-    category: "Rachunki",
-    price: ctx.cost
-      .filter((obj) => {
-        if (!obj.category.localeCompare("Rachunki")) return obj.price;
-      })
-      .reduce((total, obj) => {
-        return +obj.price + total;
-      }, 0),
-  });
-  costSummary.push({
-    category: "Zakupy",
-    price: ctx.cost
-      .filter((obj) => {
-        if (!obj.category.localeCompare("Zakupy")) return obj.price;
-      })
-      .reduce((total, obj) => {
-        return +obj.price + total;
-      }, 0),
-  });
-  costSummary.push({
-    category: "Raty",
-    price: ctx.cost
-      .filter((obj) => {
-        if (!obj.category.localeCompare("Raty")) return obj.price;
-      })
-      .reduce((total, obj) => {
-        return +obj.price + total;
-      }, 0),
-  });
-  costSummary.push({
-    category: "Inne",
-    price: ctx.cost
-      .filter((obj) => {
-        if (!obj.category.localeCompare("Inne")) return obj.price;
-      })
-      .reduce((total, obj) => {
-        return +obj.price + total;
-      }, 0),
-  });
 
-  console.log(costSummary);
+  let costSummary = [];
+
+  const reduceCost = (category) => {
+    costSummary.push({
+      category: category,
+      price: ctx.cost
+        .filter((obj) => {
+          if (!obj.category.localeCompare(category)) return obj.price;
+        })
+        .reduce((total, obj) => {
+          return +obj.price + total;
+        }, 0),
+    });
+  };
+
+  reduceCost("Jedzenie");
+  reduceCost("Rachunki");
+  reduceCost("Raty");
+  reduceCost("Zakupy");
+  reduceCost("Inne");
+
   const [chartData, setChartData] = useState({
     labels: costSummary.map((data) => data.category),
     datasets: [
@@ -77,10 +45,9 @@ const CharPie = () => {
       },
     ],
   });
-  console.log(chartData);
   return (
     <div className="chart-container">
-      <h2 style={{ textAlign: "center" }}>Pie Chart</h2>
+      <h2 style={{ textAlign: "center" }}>Wykres wydatków</h2>
       <Pie
         data={chartData}
         options={{
