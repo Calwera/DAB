@@ -11,6 +11,8 @@ const AddModal = (props) => {
   const price = useRef();
   const date = useRef();
   const description = useRef();
+  const [modalType, setModalType] = useState("Wydatek");
+
   let navigate = useNavigate();
   const [formInputValidity, setFormValidity] = useState({
     category: true,
@@ -68,15 +70,29 @@ const AddModal = (props) => {
     <Fragment>
       <div className="popup active" id="add">
         <div className="popup__header">
-          <h2 className="popup__title">Dodaj Wydatek</h2>
+          <h2 className="popup__title">
+            Dodaj
+            <select id="cat" onChange={(e) => setModalType(e.target.value)}>
+              <option value="">Wydatek</option>
+              <option value="Przychod">Przychód</option>
+            </select>
+          </h2>
+
           <Link to="/">
             <button className="popup__close-button">&times;</button>
           </Link>
         </div>
         <form className="popup__form" onSubmit={submitHandler}>
-          <label htmlFor="category" className="popup__form-select">
-            Kategoria wydatków
-          </label>
+          {modalType === "Wydatek" && (
+            <label htmlFor="category" className="popup__form-select">
+              Kategoria wydatków
+            </label>
+          )}
+          {modalType === "Przychod" && (
+            <label htmlFor="category" className="popup__form-select">
+              Kategoria Przychodu
+            </label>
+          )}
           <select id="category" ref={category}>
             <option value="">Kategorie</option>
             <option value="Jedzenie">Jedzenie</option>

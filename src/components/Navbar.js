@@ -56,7 +56,7 @@ const Navbar = () => {
                 src="icons/show.svg"
                 alt="show"
               />
-              wyświetl Wydatki
+              wyświetl
             </button>
           </Link>
         </li>

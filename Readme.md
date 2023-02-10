@@ -8,4 +8,8 @@ DAB is a simple CRUD application to help with a family budget. You can add, dele
 
 ## Technology Stack
 
-React, React-router, Firebase, Sass
+React, React-router, Firebase, Sass, Chartjs probably Next.js.
+
+# Plans
+
+Custom charts with parametrs provided by users, adding/deleting income.

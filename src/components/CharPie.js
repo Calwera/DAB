@@ -42,6 +42,7 @@ const CharPie = () => {
           ],
           borderColor: "black",
           borderWidth: 2,
+          // offset: 20,
         },
       ],
     });
@@ -49,6 +50,7 @@ const CharPie = () => {
       <div className="chart-container">
         <h2 style={{ textAlign: "center" }}>Wykres wydatków</h2>
         <Pie
+          className="chart-display"
           data={chartData}
           options={{
             plugins: {
