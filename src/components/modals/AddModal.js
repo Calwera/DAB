@@ -13,7 +13,7 @@ const AddModal = (props) => {
   const description = useRef();
   const [modalType, setModalType] = useState("Wydatek");
 
-  let navigate = useNavigate();
+  const navigate = useNavigate();
   const [formInputValidity, setFormValidity] = useState({
     category: true,
     price: true,
@@ -53,17 +53,22 @@ const AddModal = (props) => {
       return;
     }
 
-    const costEntry = {
-      category: enteredCategory,
-      price: enteredPrice,
-      date: date.current.value,
-      description: description.current.value,
-      key: Math.random().toString(),
-      user: currentUser.email,
-    };
-
-    props.addCost(costEntry);
-    navigate("/cost");
+    if (modalType === "Wydatek") {
+      const costEntry = {
+        category: enteredCategory,
+        price: enteredPrice,
+        date: date.current.value,
+        description: description.current.value,
+        key: Math.random().toString(),
+        user: currentUser.email,
+      };
+      props.addCost(costEntry);
+      navigate("/cost");
+    }
+    if (modalType === "Przychod") {
+      console.log("dziala");
+      navigate("/");
+    }
   };
 
   return (
@@ -73,7 +78,7 @@ const AddModal = (props) => {
           <h2 className="popup__title">
             Dodaj
             <select id="cat" onChange={(e) => setModalType(e.target.value)}>
-              <option value="">Wydatek</option>
+              <option value="Wydatek">Wydatek</option>
               <option value="Przychod">Przychód</option>
             </select>
           </h2>
@@ -93,18 +98,26 @@ const AddModal = (props) => {
               Kategoria Przychodu
             </label>
           )}
-          <select id="category" ref={category}>
-            <option value="">Kategorie</option>
-            <option value="Jedzenie">Jedzenie</option>
-            <option value="Rachunki">Rachunki</option>
-            <option value="Zakupy">Zakupy</option>
-            <option value="Raty">Raty</option>
-            <option value="Inne">Inne</option>
-          </select>
+          {modalType === "Wydatek" && (
+            <select id="category" ref={category}>
+              <option value="">Kategorie</option>
+              <option value="Jedzenie">Jedzenie</option>
+              <option value="Rachunki">Rachunki</option>
+              <option value="Zakupy">Zakupy</option>
+              <option value="Raty">Raty</option>
+              <option value="Inne">Inne</option>
+            </select>
+          )}
+          {modalType === "Przychod" && (
+            <select id="category" ref={category}>
+              <option value="Pensja">Pensja</option>
+              <option value="Sprzedaż">Sprzedaż</option>
+              <option value="Inne">Inne</option>
+            </select>
+          )}
           {!formInputValidity.category && (
             <span className="popup__warning">Wybierz jakąś kategorie</span>
           )}
-
           <label htmlFor="value" className="popup__form-select">
             Kwota
           </label>
@@ -120,8 +133,15 @@ const AddModal = (props) => {
           )}
           <label>Wprowadź date</label>
           <input type="date" ref={date} defaultValue={todayDate} />
-          <label htmlFor="opis">Opis</label>
-          <input type="text" id="opis" placeholder="zakupy" ref={description} />
+          {modalType === "Wydatek" && <label htmlFor="opis">Opis</label>}
+          {modalType === "Wydatek" && (
+            <input
+              type="text"
+              id="opis"
+              placeholder="zakupy"
+              ref={description}
+            />
+          )}
           <button className="btn">Zapisz</button>
         </form>
       </div>
