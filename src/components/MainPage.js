@@ -15,11 +15,18 @@ import CharPie from "./CharPie";
 
 const MainPage = () => {
   const [cost, setCost] = useState([]);
+  const [income, setIncome] = useState([]);
   const [summaryValue, setSummaryValue] = useState("");
 
   const addCost = (cost) => {
     setCost((prevCost) => {
       return [...prevCost, cost];
+    });
+  };
+
+  const addIncome = (income) => {
+    setIncome((prevIncome) => {
+      return [...prevIncome, income];
     });
   };
 
@@ -32,8 +39,22 @@ const MainPage = () => {
     });
   };
 
+  const deleteIncome = (id) => {
+    setIncome((prevIncome) => {
+      const income = prevIncome.filter((ele) => {
+        return ele.id !== id;
+      });
+      return income;
+    });
+  };
+
   const releaseCostArray = () => {
     setCost([]);
+    return cost;
+  };
+
+  const releaseIncomeArray = () => {
+    setIncome([]);
     return cost;
   };
 
@@ -89,11 +110,14 @@ const MainPage = () => {
             <Route
               path="/cost"
               element={
-                cost.length > 0 && (
+                (cost.length > 0 || income.length > 0) && (
                   <MainContent
                     costArray={cost}
                     deleteCostArray={releaseCostArray}
                     filterCostArray={deleteCost}
+                    incomeArray={income}
+                    deleteIncomeArray={releaseIncomeArray}
+                    filterIncomeArray={deleteIncome}
                   />
                 )
               }
@@ -104,7 +128,7 @@ const MainPage = () => {
             ></Route>
             <Route
               path="/addCost"
-              element={<AddModal addCost={addCost} />}
+              element={<AddModal addCost={addCost} addIncome={addIncome} />}
             ></Route>
             <Route
               path="/displayCost"

@@ -12,7 +12,7 @@ const MainContent = (props) => {
     isLoading: false,
     id: null,
   });
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   const deleteItem = (id) => {
     setAlert({
@@ -58,6 +58,22 @@ const MainContent = (props) => {
         isLoading: true,
         id: 1,
       });
+
+      await Promise.all(
+        props.incomeArray.map(async (income, id) => {
+          set(ref(database, "income/" + dateToInteger + id), {
+            category: income.category,
+            date: income.date,
+            price: income.price,
+            user: income.user,
+          });
+        })
+      );
+      setAlert({
+        message: "Dodano Przychod",
+        isLoading: true,
+        id: 1,
+      });
     } catch (error) {
       setError(error.message);
     }
@@ -70,11 +86,13 @@ const MainContent = (props) => {
       id: null,
     });
     props.deleteCostArray();
+    props.deleteIncomeArray();
     navigate("/");
   };
 
   const declineHandler = () => {
     props.deleteCostArray();
+    props.deleteIncomeArray();
     navigate("/");
   };
 
@@ -96,19 +114,25 @@ const MainContent = (props) => {
               deleteHandler={deleteItem}
             />
           ))}
+
+          {props.incomeArray.map((item) => (
+            <CostEntry cost={item} key={item.key} deleteHandler={deleteItem} />
+          ))}
         </ul>
       </section>
       {error && <p>{error}</p>}
-      {props.costArray.length > 0 && props.costArray[0].id === undefined && (
-        <div className="main-page">
-          <button className="button-big confirm" onClick={confirmHandler}>
-            Zapisz wydatki w bazie
-          </button>
-          <button className="button-big cancel" onClick={declineHandler}>
-            Anuluj
-          </button>
-        </div>
-      )}
+      {props.costArray.length > 0 ||
+        (props.incomeArray.length > 0 && (
+          // props.costArray[0].id === undefined &&
+          <div className="main-page">
+            <button className="button-big confirm" onClick={confirmHandler}>
+              Zapisz wydatki w bazie
+            </button>
+            <button className="button-big cancel" onClick={declineHandler}>
+              Anuluj
+            </button>
+          </div>
+        ))}
       {props.costArray.length > 0 && props.costArray[0].id && (
         <button className="button-big cancel" onClick={declineHandler}>
           Wyjdz

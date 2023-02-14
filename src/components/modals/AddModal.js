@@ -54,20 +54,25 @@ const AddModal = (props) => {
     }
 
     if (modalType === "Wydatek") {
-      const costEntry = {
+      props.addCost({
         category: enteredCategory,
         price: enteredPrice,
         date: date.current.value,
         description: description.current.value,
         key: Math.random().toString(),
         user: currentUser.email,
-      };
-      props.addCost(costEntry);
+      });
       navigate("/cost");
     }
     if (modalType === "Przychod") {
-      console.log("dziala");
-      navigate("/");
+      props.addIncome({
+        category: enteredCategory,
+        price: enteredPrice,
+        date: date.current.value,
+        key: Math.random().toString(),
+        user: currentUser.email,
+      });
+      navigate("/cost");
     }
   };
 
