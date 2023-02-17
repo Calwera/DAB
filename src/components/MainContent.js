@@ -121,18 +121,17 @@ const MainContent = (props) => {
         </ul>
       </section>
       {error && <p>{error}</p>}
-      {props.costArray.length > 0 ||
-        (props.incomeArray.length > 0 && (
-          // props.costArray[0].id === undefined &&
+      {(props.costArray.length > 0 || props.incomeArray.length > 0) &&
+        props.costArray[0].id === undefined && (
           <div className="main-page">
             <button className="button-big confirm" onClick={confirmHandler}>
-              Zapisz wydatki w bazie
+              Zapisz bazie
             </button>
             <button className="button-big cancel" onClick={declineHandler}>
               Anuluj
             </button>
           </div>
-        ))}
+        )}
       {props.costArray.length > 0 && props.costArray[0].id && (
         <button className="button-big cancel" onClick={declineHandler}>
           Wyjdz
