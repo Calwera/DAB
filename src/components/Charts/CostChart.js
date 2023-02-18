@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useCost } from "../contexts/CostContext";
+import { useCost } from "../../contexts/CostContext";
 import { Pie } from "react-chartjs-2";
 
 const CostChart = () => {

@@ -3,12 +3,14 @@ import { ref, onValue } from "firebase/database";
 import { database } from "../firebase";
 import { useNavigate } from "react-router-dom";
 import { useCost } from "../contexts/CostContext";
+import { useIncome } from "../contexts/IncomeContext";
 
 const CostSummary = () => {
   const navigate = useNavigate();
   const date = new Date();
   const month = date.toLocaleString("default", { month: "long" });
   const ctx = useCost();
+  const ctx2 = useIncome();
   const [cost, setCost] = useState("");
   const [income, setIncome] = useState("");
 
@@ -24,6 +26,7 @@ const CostSummary = () => {
 
   useEffect(() => {
     const fetchData = async () => {
+      // Przepisac na funckcje
       try {
         const data = ref(database, "cost/");
         const data2 = ref(database, "income/");
@@ -47,6 +50,8 @@ const CostSummary = () => {
             return { ...dataSnapshot[key], id: key };
           });
 
+          ctx2.setIncome(array);
+
           const totalAmount = array
             .filter((item) => item.date >= today)
             .reduce((prev, curr) => prev + +curr.price, 0);
@@ -60,18 +65,22 @@ const CostSummary = () => {
     fetchData();
   }, []);
 
-  const clickHandler = () => {
+  const clickHandlerCost = () => {
     navigate("/Wydatkiwyk");
+  };
+
+  const clickHandlerIncome = () => {
+    navigate("Przychodwyk");
   };
 
   return (
     <section className="container">
-      <div className="counter" onClick={clickHandler}>
+      <div className="counter" onClick={clickHandlerCost}>
         <h3 className="counter__title">Wydatki</h3>
         <div className="counter__value">{cost}</div>
         <div className="counter__title">{month}</div>
       </div>
-      <div className="counter" onClick={clickHandler}>
+      <div className="counter" onClick={clickHandlerIncome}>
         <h3 className="counter__title">Przychody</h3>
         <div className="counter__income">{income}</div>
         <div className="counter__title">{month}</div>
