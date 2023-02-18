@@ -61,7 +61,7 @@ const CostSummary = () => {
   }, []);
 
   const clickHandler = () => {
-    navigate("/ChartPie");
+    navigate("/Wydatkiwyk");
   };
 
   return (
@@ -73,12 +73,17 @@ const CostSummary = () => {
       </div>
       <div className="counter" onClick={clickHandler}>
         <h3 className="counter__title">Przychody</h3>
-        <div className="counter__value">{income}</div>
+        <div className="counter__income">{income}</div>
         <div className="counter__title">{month}</div>
       </div>
-      <div className="counter" onClick={clickHandler}>
+      <div className="counter">
         <h3 className="counter__title">Balans</h3>
-        <div className="counter__value">{income - cost}</div>
+        {income - cost > 0 && (
+          <div className="counter__income">{income - cost}</div>
+        )}
+        {income - cost <= 0 && (
+          <div className="counter__value">{income - cost}</div>
+        )}
         <div className="counter__title">{month}</div>
       </div>
     </section>

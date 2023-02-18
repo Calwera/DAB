@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useCost } from "../contexts/CostContext";
 import { Pie } from "react-chartjs-2";
 
-const CharPie = () => {
+const CostChart = () => {
   const ctx = useCost();
   if (ctx.cost) {
     let costSummary = [];
@@ -68,4 +68,4 @@ const CharPie = () => {
   }
 };
 
-export default CharPie;
+export default CostChart;

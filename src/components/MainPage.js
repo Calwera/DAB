@@ -11,7 +11,7 @@ import Navbar from "./Navbar";
 import Card from "./UI/Card";
 import CostSummary from "./CostSummary";
 import Charts from "./Charts";
-import CharPie from "./CharPie";
+import CharPie from "./CostChart";
 
 const MainPage = () => {
   const [cost, setCost] = useState([]);
@@ -139,7 +139,7 @@ const MainPage = () => {
               element={<SummaryModal onSummaryShow={showSummary} />}
             ></Route>
             <Route path="/Chart" element={<Charts />}></Route>
-            <Route path="/ChartPie" element={<CharPie />}></Route>
+            <Route path="/Wydatkiwyk" element={<CharPie />}></Route>
           </Routes>
         </div>
       </section>

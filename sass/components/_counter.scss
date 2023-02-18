@@ -13,11 +13,16 @@
   margin: 3rem;
   padding: 2rem;
   width: 15rem;
+  cursor: pointer;
 
   &__title {
     color: $color-white;
   }
 
+  &__income {
+    color: $color-text-green;
+    font-size: 3rem;
+  }
   &__value {
     color: $color-text-red;
     font-size: 3rem;
