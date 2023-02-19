@@ -10,8 +10,8 @@ export function IncomeContextProvider({ children }) {
   const [income, setIncome] = useState("");
 
   const value = {
-    income: income,
-    setIncome: setIncome,
+    income,
+    setIncome,
   };
 
   return (

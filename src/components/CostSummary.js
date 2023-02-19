@@ -2,15 +2,15 @@ import React, { useEffect, useState, useContext, Fragment } from "react";
 import { ref, onValue } from "firebase/database";
 import { database } from "../firebase";
 import { useNavigate } from "react-router-dom";
+
 import { useCost } from "../contexts/CostContext";
-import { useIncome } from "../contexts/IncomeContext";
 
 const CostSummary = () => {
   const navigate = useNavigate();
   const date = new Date();
   const month = date.toLocaleString("default", { month: "long" });
   const ctx = useCost();
-  const ctx2 = useIncome();
+
   const [cost, setCost] = useState("");
   const [income, setIncome] = useState("");
 
@@ -50,7 +50,7 @@ const CostSummary = () => {
             return { ...dataSnapshot[key], id: key };
           });
 
-          ctx2.setIncome(array);
+          ctx.setIncome(array.filter((item) => item.date >= today));
 
           const totalAmount = array
             .filter((item) => item.date >= today)
@@ -70,7 +70,7 @@ const CostSummary = () => {
   };
 
   const clickHandlerIncome = () => {
-    navigate("Przychodwyk");
+    navigate("/Przychodwyk");
   };
 
   return (

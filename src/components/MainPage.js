@@ -142,7 +142,7 @@ const MainPage = () => {
             ></Route>
             <Route path="/Chart" element={<Charts />}></Route>
             <Route path="/Wydatkiwyk" element={<CostChart />} />
-            <Route path="/Dochodwyk" element={<IncomeChart />} />
+            <Route path="/Przychodwyk" element={<IncomeChart />} />
           </Routes>
         </div>
       </section>
