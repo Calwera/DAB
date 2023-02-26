@@ -62,14 +62,21 @@ const MainPage = () => {
 
   const displaySavedCost = (array) => {
     releaseCostArray();
+    releaseIncomeArray();
 
     if (array.category) {
       if (array.category === "Wszystko") {
         const filteredArray = array.cost.filter(
           (cost) => cost.date >= array.dateFrom && cost.date <= array.dateTo
         );
-        filteredArray.forEach((item) => addCost(item));
-        return;
+        if (array.cost) {
+          filteredArray.forEach((item) => addCost(item));
+          return;
+        }
+        if (array.income) {
+          filteredArray.forEach((item) => addIncome(item));
+          return;
+        }
       }
 
       const filteredArray = array.cost.filter(
@@ -78,9 +85,20 @@ const MainPage = () => {
           cost.date >= array.dateFrom &&
           cost.date <= array.dateTo
       );
-      filteredArray.forEach((item) => addCost(item));
+
+      if (array.cost) {
+        filteredArray.forEach((item) => addCost(item));
+      }
+      if (array.income) {
+        filteredArray.forEach((item) => addIncome(item));
+      }
     } else {
-      array.cost.forEach((item) => addCost(item));
+      if (array.cost) {
+        array.cost.forEach((item) => addCost(item));
+      }
+      if (array.income) {
+        array.cost.forEach((item) => addIncome(item));
+      }
     }
   };
 

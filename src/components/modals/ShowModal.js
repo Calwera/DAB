@@ -1,4 +1,4 @@
-import React, { useRef, Fragment, useEffect } from "react";
+import React, { useRef, Fragment, useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { database } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
@@ -7,7 +7,8 @@ const ShowModal = (props) => {
   const category = useRef();
   const dateFrom = useRef();
   const dateTo = useRef();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
+  const [modalType, setModalType] = useState("Wydatek");
 
   useEffect(() => {
     const handleEsc = (event) => {
@@ -26,22 +27,45 @@ const ShowModal = (props) => {
     event.preventDefault();
 
     try {
-      const data = ref(database, "cost/");
-      let costArrayAndCondition = {
-        dateFrom: dateFrom.current.value,
-        dateTo: dateTo.current.value,
-        category: category.current.value,
-      };
+      if (modalType === "Wydatek") {
+        const data = ref(database, "cost/");
+        let costArrayAndCondition = {
+          dateFrom: dateFrom.current.value,
+          dateTo: dateTo.current.value,
+          category: category.current.value,
+          cost: 1,
+        };
 
-      await onValue(data, (snapshot) => {
-        const dataSnapshot = snapshot.val();
-        const array = Object.keys(dataSnapshot).map((key) => {
-          return { ...dataSnapshot[key], id: key };
+        await onValue(data, (snapshot) => {
+          const dataSnapshot = snapshot.val();
+          const array = Object.keys(dataSnapshot).map((key) => {
+            return { ...dataSnapshot[key], id: key };
+          });
+
+          costArrayAndCondition.cost = array;
+          props.onDisplaySavedCost(costArrayAndCondition);
         });
+      }
+      if (modalType === "Przychod") {
+        const data = ref(database, "income/");
+        let costArrayAndCondition = {
+          dateFrom: dateFrom.current.value,
+          dateTo: dateTo.current.value,
+          category: category.current.value,
+          income: 1,
+        };
 
-        costArrayAndCondition.cost = array;
-        props.onDisplaySavedCost(costArrayAndCondition);
-      });
+        await onValue(data, (snapshot) => {
+          const dataSnapshot = snapshot.val();
+          const array = Object.keys(dataSnapshot).map((key) => {
+            return { ...dataSnapshot[key], id: key };
+          });
+
+          costArrayAndCondition.cost = array;
+          props.onDisplaySavedCost(costArrayAndCondition);
+        });
+      }
+
       navigate("/cost");
     } catch (error) {
       console.log(error.message);
@@ -52,7 +76,13 @@ const ShowModal = (props) => {
     <Fragment>
       <div className="popup active">
         <div className="popup__header">
-          <h2 className="popup__title">Wyświetl zawartość</h2>
+          <h2 className="popup__title">
+            Wyświetl zawartość
+            <select id="cat" onChange={(e) => setModalType(e.target.value)}>
+              <option value="Wydatek">Wydatek</option>
+              <option value="Przychod">Przychód</option>
+            </select>
+          </h2>
           <Link to="/">
             <button className="popup__close-button">&times;</button>
           </Link>
@@ -62,15 +92,25 @@ const ShowModal = (props) => {
             <label htmlFor="category" className="popup__form-select">
               Kategoria wydatków
             </label>
-            <select id="category" ref={category}>
-              <option value="">Kategorie</option>
-              <option value="Jedzenie">Jedzenie</option>
-              <option value="Rachunki">Rachunki</option>
-              <option value="Zakupy">Zakupy</option>
-              <option value="Raty">Raty</option>
-              <option value="Inne">Inne</option>
-              <option value="Wszystko">wszystko</option>
-            </select>
+            {modalType === "Wydatek" && (
+              <select id="category" ref={category}>
+                <option value="">Kategorie</option>
+                <option value="Jedzenie">Jedzenie</option>
+                <option value="Rachunki">Rachunki</option>
+                <option value="Zakupy">Zakupy</option>
+                <option value="Raty">Raty</option>
+                <option value="Inne">Inne</option>
+                <option value="Wszystko">wszystko</option>
+              </select>
+            )}
+            {modalType === "Przychod" && (
+              <select id="category" ref={category}>
+                <option value="Pensja">Pensja</option>
+                <option value="Inne">Inne</option>
+                <option value="Sprzedaz">Sprzedaz</option>
+                <option value="Wszystko">wszystko</option>
+              </select>
+            )}
           </div>
           <label>Wprowadź zakres dat</label>
           <label>
