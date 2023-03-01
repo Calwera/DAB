@@ -61,6 +61,7 @@ const AddModal = (props) => {
         description: description.current.value,
         key: Math.random().toString(),
         user: currentUser.email,
+        type: 1,
       });
       navigate("/cost");
     }
@@ -71,6 +72,7 @@ const AddModal = (props) => {
         date: date.current.value,
         key: Math.random().toString(),
         user: currentUser.email,
+        type: 2,
       });
       navigate("/cost");
     }

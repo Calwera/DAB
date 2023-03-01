@@ -12,6 +12,7 @@ const MainContent = (props) => {
     isLoading: false,
     id: null,
   });
+
   const navigate = useNavigate();
 
   const deleteItem = (id) => {
@@ -43,7 +44,6 @@ const MainContent = (props) => {
     try {
       await Promise.all(
         props.costArray.map(async (cost, id) => {
-          console.log(cost.user);
           set(ref(database, "cost/" + dateToInteger + id), {
             category: cost.category,
             date: cost.date,
@@ -116,7 +116,11 @@ const MainContent = (props) => {
           ))}
 
           {props.incomeArray.map((item) => (
-            <CostEntry cost={item} key={item.key} deleteHandler={deleteItem} />
+            <CostEntry
+              cost={item}
+              key={item.key || item.id}
+              deleteHandler={deleteItem}
+            />
           ))}
         </ul>
       </section>

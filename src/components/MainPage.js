@@ -57,7 +57,7 @@ const MainPage = () => {
 
   const releaseIncomeArray = () => {
     setIncome([]);
-    return cost;
+    return income;
   };
 
   const displaySavedCost = (array) => {
@@ -88,8 +88,7 @@ const MainPage = () => {
 
       if (array.cost) {
         filteredArray.forEach((item) => addCost(item));
-      }
-      if (array.income) {
+      } else {
         filteredArray.forEach((item) => addIncome(item));
       }
     } else {
@@ -97,7 +96,7 @@ const MainPage = () => {
         array.cost.forEach((item) => addCost(item));
       }
       if (array.income) {
-        array.cost.forEach((item) => addIncome(item));
+        array.income.forEach((item) => addIncome(item));
       }
     }
   };
