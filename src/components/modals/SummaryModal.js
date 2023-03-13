@@ -7,7 +7,7 @@ const SummaryModal = (props) => {
   const category = useRef();
   const dateFrom = useRef();
   const dateTo = useRef();
-  let navigate = useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const handleEsc = (event) => {
