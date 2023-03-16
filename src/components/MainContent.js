@@ -126,7 +126,7 @@ const MainContent = (props) => {
       </section>
       {error && <p>{error}</p>}
       {(props.costArray.length > 0 || props.incomeArray.length > 0) &&
-        props.costArray[0].id === undefined && (
+        props.costArray.id === undefined && (
           <div className="main-page">
             <button className="button-big confirm" onClick={confirmHandler}>
               Zapisz bazie
