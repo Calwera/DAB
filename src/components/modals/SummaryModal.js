@@ -1,4 +1,4 @@
-import React, { useRef, Fragment, useEffect } from "react";
+import React, { useRef, Fragment, useEffect, useState } from "react";
 import { ref, onValue } from "firebase/database";
 import { database } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,6 +8,7 @@ const SummaryModal = (props) => {
   const dateFrom = useRef();
   const dateTo = useRef();
   const navigate = useNavigate();
+  const [modalType, setModalType] = useState("Wydatek");
 
   useEffect(() => {
     const handleEsc = (event) => {
@@ -26,7 +27,12 @@ const SummaryModal = (props) => {
     event.preventDefault();
 
     try {
-      const data = ref(database, "cost/");
+      let data = "";
+      if (modalType === "Przychod") {
+        data = ref(database, "income/");
+      } else {
+        data = ref(database, "cost/");
+      }
       const conditions = {
         category: category.current.value,
         dateFrom: dateFrom.current.value,
@@ -72,7 +78,13 @@ const SummaryModal = (props) => {
     <Fragment>
       <div className="popup active">
         <div className="popup__header">
-          <h2 className="popup__title">Podsumuj</h2>
+          <h2 className="popup__title">
+            Podsumuj
+            <select id="cat" onChange={(e) => setModalType(e.target.value)}>
+              <option value="Wydatek">Wydatek</option>
+              <option value="Przychod">Przychód</option>
+            </select>
+          </h2>
           <Link to="/">
             <button className="popup__close-button">&times;</button>
           </Link>
@@ -82,15 +94,25 @@ const SummaryModal = (props) => {
             <label htmlFor="category" className="popup__form-select">
               Kategoria wydatków
             </label>
-            <select id="category" ref={category}>
-              <option value="">Kategorie</option>
-              <option value="Jedzenie">Jedzenie</option>
-              <option value="Rachunki">Rachunki</option>
-              <option value="Zakupy">Zakupy</option>
-              <option value="Raty">Raty</option>
-              <option value="Inne">Inne</option>
-              <option value="Wszystko">wszystko</option>
-            </select>
+            {modalType === "Wydatek" && (
+              <select id="category" ref={category}>
+                <option value="">Kategorie</option>
+                <option value="Jedzenie">Jedzenie</option>
+                <option value="Rachunki">Rachunki</option>
+                <option value="Zakupy">Zakupy</option>
+                <option value="Raty">Raty</option>
+                <option value="Inne">Inne</option>
+                <option value="Wszystko">wszystko</option>
+              </select>
+            )}
+            {modalType === "Przychod" && (
+              <select id="category" ref={category}>
+                <option value="Pensja">Pensja</option>
+                <option value="Inne">Inne</option>
+                <option value="Sprzedaz">Sprzedaz</option>
+                <option value="Wszystko">wszystko</option>
+              </select>
+            )}
           </div>
           <label>Wprowadź zakres dat</label>
           <label>
