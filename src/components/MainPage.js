@@ -11,7 +11,6 @@ import Navbar from "./Navbar";
 import Card from "./UI/Card";
 import CostSummary from "./CostSummary";
 import Charts from "./Charts";
-
 import IncomeChart from "./Charts/IncomeChart";
 import CostChart from "./Charts/CostChart";
 

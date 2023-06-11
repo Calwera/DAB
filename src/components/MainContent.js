@@ -114,7 +114,7 @@ const MainContent = (props) => {
               deleteHandler={deleteItem}
             />
           ))}
-
+          {console.log(props.incomeArray)}
           {props.incomeArray.map((item) => (
             <CostEntry
               cost={item}
@@ -125,8 +125,19 @@ const MainContent = (props) => {
         </ul>
       </section>
       {error && <p>{error}</p>}
-      {(props.costArray.length > 0 || props.incomeArray.length > 0) &&
-        props.costArray.id === undefined && (
+
+      {props.costArray.length > 0 && props.costArray[0].key !== undefined && (
+        <div className="main-page">
+          <button className="button-big confirm" onClick={confirmHandler}>
+            Zapisz bazie
+          </button>
+          <button className="button-big cancel" onClick={declineHandler}>
+            Anuluj
+          </button>
+        </div>
+      )}
+      {props.incomeArray.length > 0 &&
+        props.incomeArray[0].key !== undefined && (
           <div className="main-page">
             <button className="button-big confirm" onClick={confirmHandler}>
               Zapisz bazie
