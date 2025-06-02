@@ -4,8 +4,8 @@
   "description": "dab app",
   "main": "index.js",
   "scripts": {
-    "compile:sass": "node-sass sass/main.scss css/style.css -w",
-    "start": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack-dev-server --mode development",
+    "compile:sass": "sass --watch sass/main.scss css/style.css -w",
+    "start": "cross-env webpack-dev-server --mode development",
     "build": "webpack-dev-server --mode production"
   },
   "repository": {
@@ -22,14 +22,15 @@
     "@babel/cli": "^7.0.0",
     "@babel/core": "^7.18.10",
     "@babel/preset-env": "^7.18.10",
-    "@babel/preset-react": "^7.18.6",
+    "@babel/preset-react": "^7.27.1",
     "babel-loader": "^8.2.5",
     "css-loader": "^1.0.1",
     "file-loader": "^6.2.0",
-    "node-sass": "^7.0.0",
+    "node-sass": "^7.0.1",
+    "sass": "^1.89.0",
     "webpack": "^4.19.1",
     "webpack-cli": "^3.1.1",
-    "webpack-dev-server": "^3.1.8"
+    "webpack-dev-server": "^3.11.3"
   },
   "dependencies": {
     "chart.js": "^3.9.1",
@@ -41,7 +42,6 @@
     "react-chartjs-2": "^4.3.1",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
-    "sass": "^1.54.4",
     "style-loader": "^2.0.0",
     "url-loader": "^4.1.1"
   }

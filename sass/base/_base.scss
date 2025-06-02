@@ -8,7 +8,7 @@
 }
 
 html {
-  font-size: 62, 5%;
+  font-size: 62.5%;
   font-family: "Exo 2", sans-serif;
   height: 100%;
 }
@@ -25,10 +25,9 @@ body {
 }
 
 .background-image {
-
   min-height: 100vh;
   position: relative;
-
+  z-index: 0;
 }
 
 .background-image::before {
@@ -40,8 +39,9 @@ body {
   width: 100%;
   height: 100%;
   opacity: 0.2;
-  background-image: url(./../public/icons/dab_background.jpeg);
-  // background-size: cover;
-  pointer-events:none;
+  background-image: url(/icons/dab_background.jpeg);
+  background-size: cover;
+  pointer-events: none;
   background-repeat: repeat;
+  z-index: 1;
 }
