@@ -65,36 +65,44 @@ const MainPage = () => {
 
     if (array.category) {
       if (array.category === "Wszystko") {
-        const filteredArray = array.cost.filter(
-          (cost) => cost.date >= array.dateFrom && cost.date <= array.dateTo
-        );
-        if (array.cost) {
+        if (Array.isArray(array.cost)) {
+          const filteredArray = array.cost.filter(
+            (cost) => cost.date >= array.dateFrom && cost.date <= array.dateTo
+          );
           filteredArray.forEach((item) => addCost(item));
-          return;
         }
-        if (array.income) {
+        if (Array.isArray(array.income)) {
+          const filteredArray = array.income.filter(
+            (income) =>
+              income.date >= array.dateFrom && income.date <= array.dateTo
+          );
           filteredArray.forEach((item) => addIncome(item));
-          return;
         }
+        return;
       }
 
-      const filteredArray = array.cost.filter(
-        (cost) =>
-          cost.category === array.category &&
-          cost.date >= array.dateFrom &&
-          cost.date <= array.dateTo
-      );
-
-      if (array.cost) {
+      if (Array.isArray(array.cost)) {
+        const filteredArray = array.cost.filter(
+          (cost) =>
+            cost.category === array.category &&
+            cost.date >= array.dateFrom &&
+            cost.date <= array.dateTo
+        );
         filteredArray.forEach((item) => addCost(item));
-      } else {
+      } else if (Array.isArray(array.income)) {
+        const filteredArray = array.income.filter(
+          (income) =>
+            income.category === array.category &&
+            income.date >= array.dateFrom &&
+            income.date <= array.dateTo
+        );
         filteredArray.forEach((item) => addIncome(item));
       }
     } else {
-      if (array.cost) {
+      if (Array.isArray(array.cost)) {
         array.cost.forEach((item) => addCost(item));
       }
-      if (array.income) {
+      if (Array.isArray(array.income)) {
         array.income.forEach((item) => addIncome(item));
       }
     }

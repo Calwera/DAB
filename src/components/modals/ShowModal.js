@@ -1,5 +1,5 @@
 import React, { useRef, Fragment, useEffect, useState } from "react";
-import { ref, onValue } from "firebase/database";
+import { ref, get } from "firebase/database";
 import { database } from "../../firebase";
 import { Link, useNavigate } from "react-router-dom";
 
@@ -21,51 +21,36 @@ const ShowModal = (props) => {
     return () => {
       window.removeEventListener("keydown", handleEsc);
     };
-  }, []);
+  }, [navigate]);
 
   const submitHandler = async (event) => {
     event.preventDefault();
 
     try {
+      const dataPath = modalType === "Wydatek" ? "cost/" : "income/";
+      const dataRef = ref(database, dataPath);
+      const result = {
+        dateFrom: dateFrom.current.value,
+        dateTo: dateTo.current.value,
+        category: category.current.value,
+      };
+
+      const snapshot = await get(dataRef);
+      const dataSnapshot = snapshot.val();
+      const array = dataSnapshot
+        ? Object.keys(dataSnapshot).map((key) => ({
+            ...dataSnapshot[key],
+            id: key,
+          }))
+        : [];
+      console.log("showmodal: ", array);
       if (modalType === "Wydatek") {
-        const data = ref(database, "cost/");
-        let costArrayAndCondition = {
-          dateFrom: dateFrom.current.value,
-          dateTo: dateTo.current.value,
-          category: category.current.value,
-          cost: 1,
-        };
-
-        await onValue(data, (snapshot) => {
-          const dataSnapshot = snapshot.val();
-          const array = Object.keys(dataSnapshot).map((key) => {
-            return { ...dataSnapshot[key], id: key };
-          });
-
-          costArrayAndCondition.cost = array;
-          props.onDisplaySavedCost(costArrayAndCondition);
-        });
-      }
-      if (modalType === "Przychod") {
-        const data = ref(database, "income/");
-        let costArrayAndCondition = {
-          dateFrom: dateFrom.current.value,
-          dateTo: dateTo.current.value,
-          category: category.current.value,
-          income: 1,
-        };
-
-        await onValue(data, (snapshot) => {
-          const dataSnapshot = snapshot.val();
-          const array = Object.keys(dataSnapshot).map((key) => {
-            return { ...dataSnapshot[key], id: key };
-          });
-
-          costArrayAndCondition.cost = array;
-          props.onDisplaySavedCost(costArrayAndCondition);
-        });
+        result.cost = array;
+      } else {
+        result.income = array;
       }
 
+      props.onDisplaySavedCost(result);
       navigate("/cost");
     } catch (error) {
       console.log(error.message);
@@ -90,7 +75,7 @@ const ShowModal = (props) => {
         <form className="popup__form" onSubmit={submitHandler}>
           <div>
             <label htmlFor="category" className="popup__form-select">
-              Kategoria wydatków
+              Kategoria {modalType === "Wydatek" ? "wydatków" : "przychodów"}
             </label>
             {modalType === "Wydatek" && (
               <select id="category" ref={category}>
